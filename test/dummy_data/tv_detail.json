@@ -1,0 +1,102 @@
+{
+    "backdrop_path": "/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg",
+    "created_by": [
+        {
+            "id": 1757552,
+            "credit_id": "602c5041cedac4003f4ff8ec",
+            "name": "Jonathan Igla",
+            "gender": 2,
+            "profile_path": "/qZEOruWxWZZMGXPnQcSDC38w1R2.jpg"
+        }
+    ],
+    "episode_run_time": [
+        50
+    ],
+    "first_air_date": "2021-11-24",
+    "genres": [
+        {
+            "id": 10759,
+            "name": "Action & Adventure"
+        },
+        {
+            "id": 18,
+            "name": "Drama"
+        }
+    ],
+    "homepage": "https://www.disneyplus.com/series/hawkeye/11Zy8m9Dkj5l",
+    "id": 88329,
+    "in_production": false,
+    "languages": [
+        "en"
+    ],
+    "last_air_date": "2021-12-22",
+    "last_episode_to_air": {
+        "air_date": "2021-12-22",
+        "episode_number": 6,
+        "id": 3301369,
+        "name": "So This Is Christmas?",
+        "overview": "Clint and Kate’s partnership is tested as they face the consequences of exposing the conspiracy.",
+        "production_code": "",
+        "season_number": 1,
+        "still_path": "/nXuI42V8HgmyMlewU2tiOEEjKsC.jpg",
+        "vote_average": 7.917,
+        "vote_count": 12
+    },
+    "name": "Hawkeye",
+    "next_episode_to_air": null,
+    "networks": [
+        {
+            "name": "Disney+",
+            "id": 2739,
+            "logo_path": "/gJ8VX6JSu3ciXHuC2dDGAo2lvwM.png",
+            "origin_country": "US"
+        }
+    ],
+    "number_of_episodes": 6,
+    "number_of_seasons": 1,
+    "origin_country": [
+        "US"
+    ],
+    "original_language": "en",
+    "original_name": "Hawkeye",
+    "overview": "Former Avenger Clint Barton has a seemingly simple mission: get back to his family for Christmas. Possible? Maybe with the help of Kate Bishop, a 22-year-old archer with dreams of becoming a superhero. The two are forced to work together when a presence from Barton’s past threatens to derail far more than the festive spirit.",
+    "popularity": 1607.746,
+    "poster_path": "/pqzjCxPVc9TkVgGRWeAoMmyqkZV.jpg",
+    "production_companies": [
+        {
+            "id": 420,
+            "logo_path": "/hUzeosd33nzE5MCNsZxCGEKTXaQ.png",
+            "name": "Marvel Studios",
+            "origin_country": "US"
+        }
+    ],
+    "production_countries": [
+        {
+            "iso_3166_1": "US",
+            "name": "United States of America"
+        }
+    ],
+    "seasons": [
+        {
+            "air_date": "2021-11-24",
+            "episode_count": 6,
+            "id": 122165,
+            "name": "Season 1",
+            "overview": "",
+            "poster_path": "/nGcqeKieycPFvsxOeLJssCTt3mL.jpg",
+            "season_number": 1
+        }
+    ],
+    "spoken_languages": [
+        {
+            "english_name": "English",
+            "iso_639_1": "en",
+            "name": "English"
+        }
+    ],
+    "status": "Ended",
+    "tagline": "This holiday season, the best gifts come with a bow.",
+    "type": "Miniseries",
+    "vote_average": 8.5,
+    "vote_count": 1267
+}
