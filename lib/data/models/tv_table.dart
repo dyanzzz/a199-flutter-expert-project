@@ -16,11 +16,11 @@ class TvTable extends Equatable {
     required this.overview,
   });
 
-  factory TvTable.fromEntity(TvDetail movie) => TvTable(
-        id: movie.id,
-        name: movie.name,
-        posterPath: movie.posterPath,
-        overview: movie.overview,
+  factory TvTable.fromEntity(TvDetail tv) => TvTable(
+        id: tv.id,
+        name: tv.name,
+        posterPath: tv.posterPath,
+        overview: tv.overview,
       );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
@@ -30,11 +30,11 @@ class TvTable extends Equatable {
         overview: map['overview'],
       );
 
-  factory TvTable.fromDTO(TvModel movie) => TvTable(
-        id: movie.id,
-        name: movie.name,
-        posterPath: movie.posterPath,
-        overview: movie.overview,
+  factory TvTable.fromDTO(TvModel tv) => TvTable(
+        id: tv.id,
+        name: tv.name,
+        posterPath: tv.posterPath,
+        overview: tv.overview,
       );
 
   Map<String, dynamic> toJson() => {

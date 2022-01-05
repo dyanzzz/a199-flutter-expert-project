@@ -8,6 +8,11 @@ import 'package:http/http.dart' as http;
 
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getOnTheAirTvShow();
+  Future<List<TvModel>> getPopularTvShow();
+  Future<List<TvModel>> getTopRatedTvShow();
+  Future<TvDetailResponse> getTvShowDetail(int id);
+  Future<List<TvModel>> getTvRecommendations(int id);
+  Future<List<TvModel>> searchTvShows(String query);
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
