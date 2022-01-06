@@ -4,18 +4,18 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 
 final testTv = Tv(
-  backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
+  backdropPath: '/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg',
   genreIds: [14, 28],
-  id: 557,
-  originalName: 'Spider-Man',
+  id: 88329,
+  originalName: 'Hawkeye',
   overview:
-      'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-  popularity: 60.441,
-  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-  name: 'Spider-Man',
-  voteAverage: 7.2,
-  voteCount: 13507,
-  firstAirDate: DateTime.parse('2002-05-01'),
+      'Former Avenger Clint Barton has a seemingly simple mission: get back to his family for Christmas. Possible? Maybe with the help of Kate Bishop, a 22-year-old archer with dreams of becoming a superhero. The two are forced to work together when a presence from Barton’s past threatens to derail far more than the festive spirit.',
+  popularity: 1607.746,
+  posterPath: '/pqzjCxPVc9TkVgGRWeAoMmyqkZV.jpg',
+  name: 'Hawkeye',
+  voteAverage: 8.5,
+  voteCount: 1267,
+  firstAirDate: DateTime.parse('2021-11-24'),
   originalLanguage: 'en',
   originCountry: ['US'],
 );
