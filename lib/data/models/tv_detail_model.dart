@@ -44,16 +44,16 @@ class TvDetailResponse extends Equatable {
     required this.voteCount,
   });
 
-  final String backdropPath;
+  final String? backdropPath;
   //final List<dynamic> createdBy;
   //final List<int> episodeRunTime;
-  final DateTime firstAirDate;
+  final String? firstAirDate;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
   final bool inProduction;
   //final List<String> languages;
-  final DateTime lastAirDate;
+  final String? lastAirDate;
   //final LastEpisodeToAirModel lastEpisodeToAir;
   final String name;
   //final NextEpisodeToAirModel? nextEpisodeToAir;
@@ -65,7 +65,7 @@ class TvDetailResponse extends Equatable {
   final String originalName;
   final String overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   //final List<NetworkModel> productionCompanies;
   //final List<ProductionCountryModel> productionCountries;
   //final List<SeasonModel> seasons;
@@ -81,14 +81,14 @@ class TvDetailResponse extends Equatable {
         backdropPath: json["backdrop_path"],
         //createdBy: List<dynamic>.from(json["created_by"].map((x) => x)),
         //episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate: json["first_air_date"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         inProduction: json["in_production"],
         //languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: DateTime.parse(json["last_air_date"]),
+        lastAirDate: json["last_air_date"],
         //lastEpisodeToAir: LastEpisodeToAirModel.fromJson(json["last_episode_to_air"]),
         name: json["name"],
         //nextEpisodeToAir: json["next_episode_to_air"] == null ? null : NextEpisodeToAirModel.fromJson(json["next_episode_to_air"]),
@@ -116,14 +116,13 @@ class TvDetailResponse extends Equatable {
         "backdrop_path": backdropPath,
         //"created_by": List<dynamic>.from(createdBy.map((x) => x)),
         //"episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-        "first_air_date":
-            "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
+        "first_air_date": "${firstAirDate.toString()}",
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "in_production": inProduction,
         //"languages": List<dynamic>.from(languages.map((x) => x)),
-        //"last_air_date":"${lastAirDate.year.toString().padLeft(4, '0')}-${lastAirDate.month.toString().padLeft(2, '0')}-${lastAirDate.day.toString().padLeft(2, '0')}",
+        "last_air_date": "${lastAirDate.toString()}",
         //"last_episode_to_air": lastEpisodeToAir.toJson(),
         "name": name,
         //"next_episode_to_air":nextEpisodeToAir == null ? null : nextEpisodeToAir!.toJson(),

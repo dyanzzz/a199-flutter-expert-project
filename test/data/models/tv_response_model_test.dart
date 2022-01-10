@@ -9,7 +9,7 @@ import '../../json_reader.dart';
 void main() {
   final testTvModel = TvModel(
       backdropPath: "/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg",
-      firstAirDate: DateTime.parse('2021-11-24'),
+      firstAirDate: '2021-11-24',
       genreIds: [10759, 18],
       id: 88329,
       name: "Hawkeye",

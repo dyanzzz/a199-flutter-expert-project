@@ -25,7 +25,7 @@ class Tv extends Equatable {
   });
 
   String? backdropPath;
-  DateTime? firstAirDate;
+  String? firstAirDate;
   List<int>? genreIds;
   int id;
   String? name;

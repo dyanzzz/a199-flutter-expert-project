@@ -43,16 +43,16 @@ class TvDetail extends Equatable {
     required this.voteCount,
   });
 
-  final String backdropPath;
+  final String? backdropPath;
   //final List<dynamic> createdBy;
   //final List<int> episodeRunTime;
-  final DateTime firstAirDate;
+  final String? firstAirDate;
   final List<Genre> genres;
   final String homepage;
   final int id;
   final bool inProduction;
   //final List<String> languages;
-  final DateTime lastAirDate;
+  final String? lastAirDate;
   //final LastEpisodeToAir lastEpisodeToAir;
   final String name;
   //final NextEpisodeToAir? nextEpisodeToAir;
@@ -64,7 +64,7 @@ class TvDetail extends Equatable {
   final String originalName;
   final String overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   //final List<Network> productionCompanies;
   //final List<ProductionCountry> productionCountries;
   //final List<Season> seasons;

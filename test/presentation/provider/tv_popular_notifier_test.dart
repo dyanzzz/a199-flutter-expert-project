@@ -37,7 +37,7 @@ void main() {
     name: 'Hawkeye',
     voteAverage: 8.5,
     voteCount: 1267,
-    firstAirDate: DateTime.parse('2021-11-24'),
+    firstAirDate: '2021-11-24',
     originalLanguage: 'en',
     originCountry: ['US'],
   );

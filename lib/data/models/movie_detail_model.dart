@@ -38,8 +38,8 @@ class MovieDetailResponse extends Equatable {
   final String originalTitle;
   final String overview;
   final double popularity;
-  final String posterPath;
-  final String releaseDate;
+  final String? posterPath;
+  final String? releaseDate;
   final int revenue;
   final int runtime;
   final String status;

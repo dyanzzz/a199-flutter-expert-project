@@ -33,7 +33,7 @@ void main() {
 
   final tTvModel = TvModel(
     backdropPath: "/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg",
-    firstAirDate: DateTime.parse('2021-11-24'),
+    firstAirDate: '2021-11-24',
     genreIds: [10759, 18],
     id: 88329,
     name: "Hawkeye",
@@ -50,7 +50,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: "/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg",
-    firstAirDate: DateTime.parse('2021-11-24'),
+    firstAirDate: '2021-11-24',
     genreIds: [10759, 18],
     id: 88329,
     name: "Hawkeye",
@@ -248,14 +248,14 @@ void main() {
       overview:
           'Former Avenger Clint Barton has a seemingly simple mission: get back to his family for Christmas. Possible? Maybe with the help of Kate Bishop, a 22-year-old archer with dreams of becoming a superhero. The two are forced to work together when a presence from Barton’s past threatens to derail far more than the festive spirit.',
       posterPath: '/pqzjCxPVc9TkVgGRWeAoMmyqkZV.jpg',
-      firstAirDate: DateTime.parse('2021-11-24'),
+      firstAirDate: '2021-11-24',
       name: 'Hawkeye',
       voteAverage: 8.5,
       voteCount: 1267,
       inProduction: false,
       numberOfSeasons: 1,
       homepage: "https://www.disneyplus.com/series/hawkeye/11Zy8m9Dkj5l",
-      lastAirDate: DateTime.parse("2021-12-22"),
+      lastAirDate: "2021-12-22",
       numberOfEpisodes: 6,
       originalLanguage: 'en',
       popularity: 1607.746,
