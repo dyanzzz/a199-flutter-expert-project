@@ -4,7 +4,6 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -157,10 +156,14 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _showGenres(tv.genres),
+                              "Genre : " + _showGenres(tv.genres),
                             ),
                             Text(
-                              _showDuration(tv.numberOfEpisodes),
+                              "Duration : " +
+                                  _showDuration(tv.numberOfEpisodes),
+                            ),
+                            Text(
+                              "First Air Date : " + tv.firstAirDate.toString(),
                             ),
                             Row(
                               children: [
@@ -183,6 +186,22 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                               tv.overview,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.all(16),
+                              child: ClipRRect(
+                                child: CachedNetworkImage(
+                                  imageUrl: '$BASE_IMAGE_URL${tv.backdropPath}',
+                                  //width: 150,
+                                  placeholder: (context, url) => Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
                             ),
                             SizedBox(height: 16),
                             Text(
@@ -213,7 +232,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                MovieDetailPage.ROUTE_NAME,
+                                                TvDetailPage.ROUTE_NAME,
                                                 arguments: tv.id,
                                               );
                                             },
