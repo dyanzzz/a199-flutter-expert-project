@@ -6,6 +6,7 @@ import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_home_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -15,6 +16,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
+  static const ROUTE_NAME = '/home-movie';
+
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -51,14 +54,24 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               },
             ),
             ListTile(
+              leading: Icon(Icons.tv),
+              title: Text('Tv Show'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, TvHomePage.ROUTE_NAME);
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
             ),
             ListTile(
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
               leading: Icon(Icons.info_outline),
@@ -85,7 +98,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Now Playing',
+                'Now Playing Movies',
                 style: kHeading6,
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {

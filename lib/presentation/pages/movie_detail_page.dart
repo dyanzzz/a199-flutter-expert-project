@@ -154,10 +154,13 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _showGenres(movie.genres),
+                              "Genre : " + _showGenres(movie.genres),
                             ),
                             Text(
-                              _showDuration(movie.runtime),
+                              "Duration : " + _showDuration(movie.runtime),
+                            ),
+                            Text(
+                              "Release Date : " + movie.releaseDate.toString(),
                             ),
                             Row(
                               children: [
@@ -180,6 +183,23 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                               movie.overview,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.all(16),
+                              child: ClipRRect(
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      '$BASE_IMAGE_URL${movie.backdropPath}',
+                                  //width: 150,
+                                  placeholder: (context, url) => Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
                             ),
                             SizedBox(height: 16),
                             Text(
