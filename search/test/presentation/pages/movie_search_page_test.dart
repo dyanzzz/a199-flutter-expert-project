@@ -1,8 +1,8 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
+import 'package:search/search.dart';
 
 import 'movie_search_page_test.mocks.dart';
 

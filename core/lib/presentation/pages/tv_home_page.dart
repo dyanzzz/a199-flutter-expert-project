@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:about/about.dart';
+import 'package:search/search.dart';
 
 class TvHomePage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tv';
