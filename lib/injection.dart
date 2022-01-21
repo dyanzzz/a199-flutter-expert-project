@@ -3,6 +3,8 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:search/bloc/search_bloc.dart';
+import 'package:search/bloc/search_tv_bloc.dart';
 import 'package:search/search.dart';
 
 final locator = GetIt.instance;
@@ -83,6 +85,9 @@ void init() {
       getTvWatchlist: locator(),
     ),
   );
+  // bloc
+  locator.registerFactory(() => SearchBloc(locator()));
+  locator.registerFactory(() => SearchTvBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

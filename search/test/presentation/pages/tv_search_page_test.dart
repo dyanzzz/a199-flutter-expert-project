@@ -29,7 +29,7 @@ void main() {
       (WidgetTester tester) async {
     final textBoxFinder = find.byType(TextField);
 
-    await tester.pumpWidget(_createApp(TextField()));
+    await tester.pumpWidget(_createApp(const TextField()));
 
     expect(textBoxFinder, findsOneWidget);
   });

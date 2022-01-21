@@ -1,6 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:search/bloc/search_bloc.dart';
+import 'package:search/bloc/search_tv_bloc.dart';
 import 'package:search/search.dart';
 
 class TvSearchPage extends StatelessWidget {
@@ -18,9 +21,12 @@ class TvSearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(context, listen: false)
-                    .fetchTvSearch(query);
+              /* onSubmitted: (query) {
+                Provider.of<TvSearchNotifier>(context, listen: false).fetchTvSearch(query);
+              }, */
+              // bloc
+              onChanged: (query) {
+                context.read<SearchTvBloc>().add(OnQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search tv name',
@@ -34,7 +40,7 @@ class TvSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
+            /* Consumer<TvSearchNotifier>(
               builder: (context, data, child) {
                 if (data.state == RequestState.Loading) {
                   return const Center(
@@ -56,6 +62,36 @@ class TvSearchPage extends StatelessWidget {
                   return Expanded(
                     child: Container(),
                   );
+                }
+              },
+            ), */
+            // bloc
+            BlocBuilder<SearchTvBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is SearchTvHasData) {
+                  final result = state.result;
+                  return Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final tv = result[index];
+                        return TvCard(tv);
+                      },
+                      itemCount: result.length,
+                    ),
+                  );
+                } else if (state is SearchError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
+                  );
+                } else {
+                  return Expanded(child: Container());
                 }
               },
             ),
