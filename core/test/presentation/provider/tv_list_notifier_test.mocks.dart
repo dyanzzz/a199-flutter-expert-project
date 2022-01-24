@@ -7,6 +7,7 @@ import 'dart:async' as _i4;
 import 'package:core/core.dart' as _i2;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:popular/domain/usecases/get_tv_popular.dart' as _i5;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -44,7 +45,7 @@ class MockGetTvOnTheAir extends _i1.Mock implements _i2.GetTvOnTheAir {
 /// A class which mocks [GetTvPopular].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTvPopular extends _i1.Mock implements _i2.GetTvPopular {
+class MockGetTvPopular extends _i1.Mock implements _i5.GetTvPopular {
   MockGetTvPopular() {
     _i1.throwOnMissingStub(this);
   }

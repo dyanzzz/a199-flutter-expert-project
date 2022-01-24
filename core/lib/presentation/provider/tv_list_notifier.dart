@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:popular/popular.dart';
 
 class TvListNotifier extends ChangeNotifier {
   var _onTheAirTvShows = <Tv>[];

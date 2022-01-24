@@ -3,8 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:popular/popular.dart';
 
-import 'tv_list_notifier_test.mocks.dart';
+import 'tv_popular_notifier_test.mocks.dart';
 
 @GenerateMocks([GetTvPopular])
 void main() {
@@ -23,7 +24,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: '/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg',
-    genreIds: [14, 28],
+    genreIds: const [14, 28],
     id: 88329,
     originalName: 'Hawkeye',
     overview:
@@ -35,7 +36,7 @@ void main() {
     voteCount: 1267,
     firstAirDate: '2021-11-24',
     originalLanguage: 'en',
-    originCountry: ['US'],
+    originCountry: const ['US'],
   );
   final tTvList = <Tv>[tTv];
 

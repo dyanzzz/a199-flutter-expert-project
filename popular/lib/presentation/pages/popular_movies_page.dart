@@ -1,32 +1,33 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:popular/popular.dart';
 import 'package:provider/provider.dart';
 
-class TvPopularPage extends StatefulWidget {
-  static const ROUTE_NAME = '/populat_tv';
+class PopularMoviesPage extends StatefulWidget {
+  static const ROUTE_NAME = '/popular-movie';
 
   @override
-  _TvPopularPageState createState() => _TvPopularPageState();
+  _PopularMoviesPageState createState() => _PopularMoviesPageState();
 }
 
-class _TvPopularPageState extends State<TvPopularPage> {
+class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TvPopularNotifier>(context, listen: false)
-            .fetchTvPopular());
+        Provider.of<PopularMoviesNotifier>(context, listen: false)
+            .fetchPopularMovies());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Tv Show'),
+        title: Text('Popular Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TvPopularNotifier>(
+        child: Consumer<PopularMoviesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.loading) {
               return Center(
@@ -35,10 +36,10 @@ class _TvPopularPageState extends State<TvPopularPage> {
             } else if (data.state == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tv[index];
-                  return TvCard(tv);
+                  final movie = data.movies[index];
+                  return MovieCard(movie);
                 },
-                itemCount: data.tv.length,
+                itemCount: data.movies.length,
               );
             } else {
               return Center(

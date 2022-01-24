@@ -7,6 +7,7 @@ import 'dart:async' as _i4;
 import 'package:core/core.dart' as _i2;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:popular/domain/usecases/get_popular_movies.dart' as _i5;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -45,7 +46,7 @@ class MockGetNowPlayingMovies extends _i1.Mock
 /// A class which mocks [GetPopularMovies].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetPopularMovies extends _i1.Mock implements _i2.GetPopularMovies {
+class MockGetPopularMovies extends _i1.Mock implements _i5.GetPopularMovies {
   MockGetPopularMovies() {
     _i1.throwOnMissingStub(this);
   }

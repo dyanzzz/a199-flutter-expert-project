@@ -1,25 +1,26 @@
 import 'package:core/core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:popular/popular.dart';
 
-class TvPopularNotifier extends ChangeNotifier {
-  final GetTvPopular getTvPopular;
+class PopularMoviesNotifier extends ChangeNotifier {
+  final GetPopularMovies getPopularMovies;
 
-  TvPopularNotifier(this.getTvPopular);
+  PopularMoviesNotifier(this.getPopularMovies);
 
   RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
-  List<Tv> _tv = [];
-  List<Tv> get tv => _tv;
+  List<Movie> _movies = [];
+  List<Movie> get movies => _movies;
 
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchTvPopular() async {
+  Future<void> fetchPopularMovies() async {
     _state = RequestState.loading;
     notifyListeners();
 
-    final result = await getTvPopular.execute();
+    final result = await getPopularMovies.execute();
 
     result.fold(
       (failure) {
@@ -27,8 +28,8 @@ class TvPopularNotifier extends ChangeNotifier {
         _state = RequestState.error;
         notifyListeners();
       },
-      (tvData) {
-        _tv = tvData;
+      (moviesData) {
+        _movies = moviesData;
         _state = RequestState.loaded;
         notifyListeners();
       },
