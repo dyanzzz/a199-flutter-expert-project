@@ -28,7 +28,7 @@ void main() {
   testWidgets('page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockWatchlistMovieNotifier.watchlistState)
-        .thenReturn(RequestState.Loading);
+        .thenReturn(RequestState.loading);
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -42,7 +42,7 @@ void main() {
   testWidgets('page should display listview when data is loaded',
       (WidgetTester tester) async {
     when(mockWatchlistMovieNotifier.watchlistState)
-        .thenReturn(RequestState.Loaded);
+        .thenReturn(RequestState.loaded);
     when(mockWatchlistMovieNotifier.watchlistMovies).thenReturn(<Movie>[]);
 
     final listViewFinder = find.byType(ListView);
@@ -55,7 +55,7 @@ void main() {
   testWidgets('page should display text with message when error',
       (WidgetTester tester) async {
     when(mockWatchlistMovieNotifier.watchlistState)
-        .thenReturn(RequestState.Error);
+        .thenReturn(RequestState.error);
     when(mockWatchlistMovieNotifier.message).thenReturn('Error Message');
 
     final textFinder = find.byKey(Key('error_message'));

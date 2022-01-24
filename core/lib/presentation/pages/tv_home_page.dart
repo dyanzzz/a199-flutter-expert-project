@@ -92,11 +92,11 @@ class _TvHomePageState extends State<TvHomePage> {
               ),
               Consumer<TvListNotifier>(builder: (context, data, child) {
                 final state = data.onTheAirTvShowsState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return TvList(data.onTheAirTvShows);
                 } else {
                   return Text('Failed');
@@ -109,11 +109,11 @@ class _TvHomePageState extends State<TvHomePage> {
               ),
               Consumer<TvListNotifier>(builder: (context, data, child) {
                 final state = data.popularTvShowsState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return TvList(data.popularTvShows);
                 } else {
                   return Text('Failed');
@@ -126,11 +126,11 @@ class _TvHomePageState extends State<TvHomePage> {
               ),
               Consumer<TvListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedTvShowState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return TvList(data.topRatedTvShows);
                 } else {
                   return Text('Failed');

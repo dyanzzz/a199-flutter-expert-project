@@ -33,7 +33,7 @@ class MockTvSearchNotifier extends _i1.Mock implements _i2.TvSearchNotifier {
       returnValue: _FakeSearchTv_0()) as _i2.SearchTv);
   @override
   _i3.RequestState get state => (super.noSuchMethod(Invocation.getter(#state),
-      returnValue: _i3.RequestState.Empty) as _i3.RequestState);
+      returnValue: _i3.RequestState.empty) as _i3.RequestState);
   @override
   List<_i3.Tv> get searchResult =>
       (super.noSuchMethod(Invocation.getter(#searchResult),

@@ -35,7 +35,7 @@ class MockMovieSearchNotifier extends _i1.Mock
           returnValue: _FakeSearchMovies_0()) as _i2.SearchMovies);
   @override
   _i3.RequestState get state => (super.noSuchMethod(Invocation.getter(#state),
-      returnValue: _i3.RequestState.Empty) as _i3.RequestState);
+      returnValue: _i3.RequestState.empty) as _i3.RequestState);
   @override
   List<_i3.Movie> get searchResult =>
       (super.noSuchMethod(Invocation.getter(#searchResult),
