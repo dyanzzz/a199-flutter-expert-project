@@ -43,6 +43,7 @@ dependencies:
       ref: master
   flutter_bloc: ^8.0.0
   rxdart: ^0.27.1
+  firebase_core: ^1.6.0
 
 dev_dependencies:
   mockito: ^5.0.8

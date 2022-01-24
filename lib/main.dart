@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,11 @@ import 'package:search/bloc/search_bloc.dart';
 import 'package:search/bloc/search_tv_bloc.dart';
 import 'package:search/search.dart';
 
-void main() {
+void main() async {
+  // firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   di.init();
   runApp(MyApp());
 }
