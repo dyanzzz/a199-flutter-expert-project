@@ -5,6 +5,7 @@ import 'package:popular/popular.dart';
 import 'package:provider/provider.dart';
 import 'package:about/about.dart';
 import 'package:search/search.dart';
+import 'package:top_rated/top_rated.dart';
 
 class TvHomePage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tv';

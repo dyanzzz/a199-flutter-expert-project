@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../dummy_data/dummy_object_tv.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {
   late TvLocalDataSourceImpl dataSource;

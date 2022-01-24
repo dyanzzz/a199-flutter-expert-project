@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:popular/popular.dart';
 import 'package:provider/provider.dart';
 import 'package:search/search.dart';
+import 'package:top_rated/top_rated.dart';
 
 class HomeMoviePage extends StatefulWidget {
   static const ROUTE_NAME = '/home-movie';

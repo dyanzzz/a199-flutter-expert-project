@@ -32,6 +32,8 @@ dependencies:
     path: search
   popular:
     path: popular
+  top_rated:
+    path: top_rated
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
