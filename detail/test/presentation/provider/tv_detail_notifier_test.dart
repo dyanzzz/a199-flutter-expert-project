@@ -12,7 +12,7 @@ import 'tv_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
   GetTvDetail,
-  GetTvRecommendation,
+  // GetTvRecommendation,
   GetTvWatchListStatus,
   SaveTvWatchlist,
   RemoveTvWatchlist,
@@ -20,7 +20,7 @@ import 'tv_detail_notifier_test.mocks.dart';
 void main() {
   late TvDetailNotifier provider;
   late MockGetTvDetail mockGetTvDetail;
-  late MockGetTvRecommendation mockGetTvRecommendation;
+  // late MockGetTvRecommendation mockGetTvRecommendation;
   late MockGetTvWatchListStatus mockGetTvWatchListStatus;
   late MockSaveTvWatchlist mockSaveTvWatchlist;
   late MockRemoveTvWatchlist mockRemoveTvWatchlist;
@@ -29,13 +29,13 @@ void main() {
   setUp(() {
     listenerCallCount = 0;
     mockGetTvDetail = MockGetTvDetail();
-    mockGetTvRecommendation = MockGetTvRecommendation();
+    // mockGetTvRecommendation = MockGetTvRecommendation();
     mockGetTvWatchListStatus = MockGetTvWatchListStatus();
     mockSaveTvWatchlist = MockSaveTvWatchlist();
     mockRemoveTvWatchlist = MockRemoveTvWatchlist();
     provider = TvDetailNotifier(
       getTvDetail: mockGetTvDetail,
-      getTvRecommendation: mockGetTvRecommendation,
+      // getTvRecommendation: mockGetTvRecommendation,
       getTvWatchListStatus: mockGetTvWatchListStatus,
       saveTvWatchlist: mockSaveTvWatchlist,
       removeTvWatchlist: mockRemoveTvWatchlist,
@@ -44,10 +44,10 @@ void main() {
       });
   });
 
-  final tId = 88329;
+  const tId = 88329;
   final tTv = Tv(
     backdropPath: '/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg',
-    genreIds: [14, 28],
+    genreIds: const [14, 28],
     id: 88329,
     originalName: 'Hawkeye',
     overview:
@@ -66,8 +66,8 @@ void main() {
   void _arrangeUsecase() {
     when(mockGetTvDetail.execute(tId))
         .thenAnswer((_) async => Right(testTvDetail));
-    when(mockGetTvRecommendation.execute(tId))
-        .thenAnswer((_) async => Right(tTvList));
+    /* when(mockGetTvRecommendation.execute(tId))
+        .thenAnswer((_) async => Right(tTvList)); */
   }
 
   group('Get tv Detail', () {
@@ -78,7 +78,7 @@ void main() {
       await provider.fetchTVDetail(tId);
       // assert
       verify(mockGetTvDetail.execute(tId));
-      verify(mockGetTvRecommendation.execute(tId));
+      // verify(mockGetTvRecommendation.execute(tId));
     });
 
     test('should change state to Loading when usecase is called', () {
@@ -110,11 +110,11 @@ void main() {
       await provider.fetchTVDetail(tId);
       // assert
       expect(provider.tvState, RequestState.loaded);
-      expect(provider.tvRecommendations, tTvList);
+      // expect(provider.tvRecommendations, tTvList);
     });
   });
 
-  group('Get tv Recommendations', () {
+  /* group('Get tv Recommendations', () {
     test('should get data from the usecase', () async {
       // arrange
       _arrangeUsecase();
@@ -148,7 +148,7 @@ void main() {
       expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
-  });
+  }); */
 
   group('Watchlist', () {
     test('should get the watchlist status', () async {
@@ -163,7 +163,7 @@ void main() {
     test('should execute save watchlist when function called', () async {
       // arrange
       when(mockSaveTvWatchlist.execute(testTvDetail))
-          .thenAnswer((_) async => Right('Success'));
+          .thenAnswer((_) async => const Right('Success'));
       when(mockGetTvWatchListStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => true);
       // act
@@ -175,7 +175,7 @@ void main() {
     test('should execute remove watchlist when function called', () async {
       // arrange
       when(mockRemoveTvWatchlist.execute(testTvDetail))
-          .thenAnswer((_) async => Right('Removed'));
+          .thenAnswer((_) async => const Right('Removed'));
       when(mockGetTvWatchListStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => false);
       // act
@@ -187,7 +187,7 @@ void main() {
     test('should update watchlist status when add watchlist success', () async {
       // arrange
       when(mockSaveTvWatchlist.execute(testTvDetail))
-          .thenAnswer((_) async => Right('Added to Watchlist'));
+          .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetTvWatchListStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => true);
       // act
@@ -218,8 +218,8 @@ void main() {
       // arrange
       when(mockGetTvDetail.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      when(mockGetTvRecommendation.execute(tId))
-          .thenAnswer((_) async => Right(tTvList));
+      /* when(mockGetTvRecommendation.execute(tId))
+          .thenAnswer((_) async => Right(tTvList)); */
       // act
       await provider.fetchTVDetail(tId);
       // assert

@@ -10,14 +10,14 @@ class TvDetailNotifier extends ChangeNotifier {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetTvDetail getTvDetail;
-  final GetTvRecommendation getTvRecommendation;
+  // final GetTvRecommendation getTvRecommendation;
   final GetTvWatchListStatus getTvWatchListStatus;
   final SaveTvWatchlist saveTvWatchlist;
   final RemoveTvWatchlist removeTvWatchlist;
 
   TvDetailNotifier({
     required this.getTvDetail,
-    required this.getTvRecommendation,
+    // required this.getTvRecommendation,
     required this.getTvWatchListStatus,
     required this.saveTvWatchlist,
     required this.removeTvWatchlist,
@@ -29,11 +29,11 @@ class TvDetailNotifier extends ChangeNotifier {
   RequestState _tvState = RequestState.empty;
   RequestState get tvState => _tvState;
 
-  List<Tv> _tvRecommendations = [];
+  /* List<Tv> _tvRecommendations = [];
   List<Tv> get tvRecommendations => _tvRecommendations;
 
   RequestState _recommendationState = RequestState.empty;
-  RequestState get recommendationState => _recommendationState;
+  RequestState get recommendationState => _recommendationState; */
 
   String _message = '';
   String get message => _message;
@@ -45,7 +45,7 @@ class TvDetailNotifier extends ChangeNotifier {
     _tvState = RequestState.loading;
     notifyListeners();
     final detailResult = await getTvDetail.execute(id);
-    final recommendationResult = await getTvRecommendation.execute(id);
+    // final recommendationResult = await getTvRecommendation.execute(id);
     detailResult.fold(
       (failure) {
         _tvState = RequestState.error;
@@ -53,10 +53,10 @@ class TvDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tv) {
-        _recommendationState = RequestState.loading;
+        // _recommendationState = RequestState.loading;
         _tv = tv;
         notifyListeners();
-        recommendationResult.fold(
+        /* recommendationResult.fold(
           (failure) {
             _recommendationState = RequestState.error;
             _message = failure.message;
@@ -65,7 +65,7 @@ class TvDetailNotifier extends ChangeNotifier {
             _recommendationState = RequestState.loaded;
             _tvRecommendations = tvs;
           },
-        );
+        ); */
         _tvState = RequestState.loaded;
         notifyListeners();
       },

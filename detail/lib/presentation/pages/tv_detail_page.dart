@@ -3,8 +3,10 @@ import 'package:core/core.dart';
 import 'package:detail/detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:recommendation/recommendation.dart';
 
 class TvDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail_tv';
@@ -25,6 +27,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
           .fetchTVDetail(widget.id);
       Provider.of<TvDetailNotifier>(context, listen: false)
           .loadTvWatchlistStatus(widget.id);
+      context.read<RecommendationTvBloc>().add(OnQueryChanged(widget.id));
     });
   }
 
@@ -42,7 +45,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
             return SafeArea(
               child: DetailContentTv(
                 tv,
-                provider.tvRecommendations,
+                // provider.tvRecommendations,
                 provider.isAddedToWatchlist,
               ),
             );
@@ -57,12 +60,12 @@ class _TvDetailPageState extends State<TvDetailPage> {
 
 class DetailContentTv extends StatelessWidget {
   final TvDetail tv;
-  final List<Tv> recommendation;
+  // final List<Tv> recommendation;
   final bool isAddedWatchlist;
 
   const DetailContentTv(
     this.tv,
-    this.recommendation,
+    // this.recommendation,
     this.isAddedWatchlist,
   );
 
@@ -204,7 +207,78 @@ class DetailContentTv extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<TvDetailNotifier>(
+                            BlocBuilder<RecommendationTvBloc,
+                                RecommendationState>(
+                              builder: (context, state) {
+                                if (state is RecommendationLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is RecommendationTvHasData) {
+                                  final result = state.result;
+                                  /* return Expanded(
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.all(8),
+                                      itemBuilder: (context, index) {
+                                        final movie = result[index];
+                                        return MovieCard(movie);
+                                      },
+                                      itemCount: result.length,
+                                    ),
+                                  ); */
+
+                                  return Container(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final tv = result[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Navigator.pushReplacementNamed(
+                                                context,
+                                                TvDetailPage.ROUTE_NAME,
+                                                arguments: tv.id,
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(8),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      itemCount: result.length,
+                                    ),
+                                  );
+                                } else if (state is RecommendationError) {
+                                  return Expanded(
+                                    child: Center(
+                                      child: Text(state.message),
+                                    ),
+                                  );
+                                } else {
+                                  return Expanded(child: Container());
+                                }
+                              },
+                            ),
+                            /* Consumer<TvDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
                                     RequestState.loading) {
@@ -260,7 +334,7 @@ class DetailContentTv extends StatelessWidget {
                                   return Container();
                                 }
                               },
-                            ),
+                            ), */
                           ],
                         ),
                       ),
