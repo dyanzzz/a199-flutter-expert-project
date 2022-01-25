@@ -10,14 +10,14 @@ class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetMovieDetail getMovieDetail;
-  final GetMovieRecommendations getMovieRecommendations;
+  // final GetMovieRecommendations getMovieRecommendations;
   final GetWatchListStatus getWatchListStatus;
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
 
   MovieDetailNotifier({
     required this.getMovieDetail,
-    required this.getMovieRecommendations,
+    // required this.getMovieRecommendations,
     required this.getWatchListStatus,
     required this.saveWatchlist,
     required this.removeWatchlist,
@@ -29,11 +29,11 @@ class MovieDetailNotifier extends ChangeNotifier {
   RequestState _movieState = RequestState.empty;
   RequestState get movieState => _movieState;
 
-  List<Movie> _movieRecommendations = [];
+/*   List<Movie> _movieRecommendations = [];
   List<Movie> get movieRecommendations => _movieRecommendations;
 
   RequestState _recommendationState = RequestState.empty;
-  RequestState get recommendationState => _recommendationState;
+  RequestState get recommendationState => _recommendationState; */
 
   String _message = '';
   String get message => _message;
@@ -45,7 +45,7 @@ class MovieDetailNotifier extends ChangeNotifier {
     _movieState = RequestState.loading;
     notifyListeners();
     final detailResult = await getMovieDetail.execute(id);
-    final recommendationResult = await getMovieRecommendations.execute(id);
+    // final recommendationResult = await getMovieRecommendations.execute(id);
     detailResult.fold(
       (failure) {
         _movieState = RequestState.error;
@@ -53,10 +53,10 @@ class MovieDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (movie) {
-        _recommendationState = RequestState.loading;
+        // _recommendationState = RequestState.loading;
         _movie = movie;
         notifyListeners();
-        recommendationResult.fold(
+        /* recommendationResult.fold(
           (failure) {
             _recommendationState = RequestState.error;
             _message = failure.message;
@@ -65,7 +65,7 @@ class MovieDetailNotifier extends ChangeNotifier {
             _recommendationState = RequestState.loaded;
             _movieRecommendations = movies;
           },
-        );
+        ); */
         _movieState = RequestState.loaded;
         notifyListeners();
       },

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:recommendation/recommendation.dart';
 import 'package:search/search.dart';
 import 'package:top_rated/top_rated.dart';
 import 'package:watchlist/watchlist.dart';
@@ -77,6 +78,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<TopRatedMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<RecommendationMovieBloc>(),
         ),
       ],
       child: MaterialApp(

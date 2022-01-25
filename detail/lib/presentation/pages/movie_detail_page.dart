@@ -3,8 +3,10 @@ import 'package:core/core.dart';
 import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:recommendation/recommendation.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
@@ -25,6 +27,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           .fetchMovieDetail(widget.id);
       Provider.of<MovieDetailNotifier>(context, listen: false)
           .loadWatchlistStatus(widget.id);
+      context.read<RecommendationMovieBloc>().add(OnQueryChanged(widget.id));
     });
   }
 
@@ -42,7 +45,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return SafeArea(
               child: DetailContent(
                 movie,
-                provider.movieRecommendations,
+                // provider.movieRecommendations,
                 provider.isAddedToWatchlist,
               ),
             );
@@ -57,10 +60,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  final List<Movie> recommendations;
+  // final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
-  const DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
+  const DetailContent(
+    this.movie,
+    // this.recommendations,
+    this.isAddedWatchlist,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +209,79 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<MovieDetailNotifier>(
+                            BlocBuilder<RecommendationMovieBloc,
+                                RecommendationState>(
+                              builder: (context, state) {
+                                if (state is RecommendationLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state
+                                    is RecommendationMovieHasData) {
+                                  final result = state.result;
+                                  /* return Expanded(
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.all(8),
+                                      itemBuilder: (context, index) {
+                                        final movie = result[index];
+                                        return MovieCard(movie);
+                                      },
+                                      itemCount: result.length,
+                                    ),
+                                  ); */
+
+                                  return Container(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final movie = result[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Navigator.pushReplacementNamed(
+                                                context,
+                                                MovieDetailPage.ROUTE_NAME,
+                                                arguments: movie.id,
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(8),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      itemCount: result.length,
+                                    ),
+                                  );
+                                } else if (state is RecommendationError) {
+                                  return Expanded(
+                                    child: Center(
+                                      child: Text(state.message),
+                                    ),
+                                  );
+                                } else {
+                                  return Expanded(child: Container());
+                                }
+                              },
+                            ),
+                            /* Consumer<MovieDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
                                     RequestState.loading) {
@@ -258,7 +337,7 @@ class DetailContent extends StatelessWidget {
                                   return Container();
                                 }
                               },
-                            ),
+                            ), */
                           ],
                         ),
                       ),
