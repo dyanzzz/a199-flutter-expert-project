@@ -39,6 +39,12 @@ dependencies:
     path: ../search
   popular:
     path: ../popular
+  top_rated:
+    path: ../top_rated
+  watchlist:
+    path: ../watchlist
+  detail:
+    path: ../detail
 
 dev_dependencies:
   mockito: ^5.0.8

@@ -234,6 +234,13 @@ packages:
       url: "https://github.com/chornthorn/data_connection_checker.git"
     source: git
     version: "0.3.4"
+  detail:
+    dependency: "direct main"
+    description:
+      path: detail
+      relative: true
+    source: path
+    version: "0.0.1"
   encrypt:
     dependency: transitive
     description:
@@ -599,6 +606,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  recommendation:
+    dependency: "direct main"
+    description:
+      path: recommendation
+      relative: true
+    source: path
+    version: "0.0.1"
   rxdart:
     dependency: "direct main"
     description:
@@ -723,6 +737,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  top_rated:
+    dependency: "direct main"
+    description:
+      path: top_rated
+      relative: true
+    source: path
+    version: "0.0.1"
   typed_data:
     dependency: transitive
     description:
@@ -751,6 +772,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  watchlist:
+    dependency: "direct main"
+    description:
+      path: watchlist
+      relative: true
+    source: path
+    version: "0.0.1"
   web_socket_channel:
     dependency: transitive
     description:

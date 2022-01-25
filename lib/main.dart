@@ -8,6 +8,9 @@ import 'package:popular/popular.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
+import 'package:top_rated/top_rated.dart';
+import 'package:watchlist/watchlist.dart';
+import 'package:detail/detail.dart';
 
 void main() async {
   // firebase
