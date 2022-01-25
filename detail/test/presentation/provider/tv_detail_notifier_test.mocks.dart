@@ -8,9 +8,11 @@ import 'package:core/core.dart' as _i2;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:detail/domain/usecases/get_tv_detail.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:watchlist/domain/usecases/get_tv_watchlist_status.dart' as _i6;
-import 'package:watchlist/domain/usecases/remove_tv_watchlist.dart' as _i8;
-import 'package:watchlist/domain/usecases/save_tv_watchlist.dart' as _i7;
+import 'package:recommendation/domain/usecases/get_tv_recommendation.dart'
+    as _i6;
+import 'package:watchlist/domain/usecases/get_tv_watchlist_status.dart' as _i7;
+import 'package:watchlist/domain/usecases/remove_tv_watchlist.dart' as _i9;
+import 'package:watchlist/domain/usecases/save_tv_watchlist.dart' as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -49,7 +51,7 @@ class MockGetTvDetail extends _i1.Mock implements _i4.GetTvDetail {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetTvRecommendation extends _i1.Mock
-    implements _i2.GetTvRecommendation {
+    implements _i6.GetTvRecommendation {
   MockGetTvRecommendation() {
     _i1.throwOnMissingStub(this);
   }
@@ -70,7 +72,7 @@ class MockGetTvRecommendation extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetTvWatchListStatus extends _i1.Mock
-    implements _i6.GetTvWatchListStatus {
+    implements _i7.GetTvWatchListStatus {
   MockGetTvWatchListStatus() {
     _i1.throwOnMissingStub(this);
   }
@@ -88,7 +90,7 @@ class MockGetTvWatchListStatus extends _i1.Mock
 /// A class which mocks [SaveTvWatchlist].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveTvWatchlist extends _i1.Mock implements _i7.SaveTvWatchlist {
+class MockSaveTvWatchlist extends _i1.Mock implements _i8.SaveTvWatchlist {
   MockSaveTvWatchlist() {
     _i1.throwOnMissingStub(this);
   }
@@ -108,7 +110,7 @@ class MockSaveTvWatchlist extends _i1.Mock implements _i7.SaveTvWatchlist {
 /// A class which mocks [RemoveTvWatchlist].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveTvWatchlist extends _i1.Mock implements _i8.RemoveTvWatchlist {
+class MockRemoveTvWatchlist extends _i1.Mock implements _i9.RemoveTvWatchlist {
   MockRemoveTvWatchlist() {
     _i1.throwOnMissingStub(this);
   }

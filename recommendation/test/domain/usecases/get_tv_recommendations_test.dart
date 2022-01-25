@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:recommendation/recommendation.dart';
 
 import '../../../../test/helpers/test_helper.mocks.dart';
 
@@ -14,7 +15,7 @@ void main() {
     usecase = GetTvRecommendation(mockTvRepository);
   });
 
-  final tId = 88329;
+  const tId = 88329;
   final tTv = <Tv>[];
 
   test('should get list of tv recommendations from the repository', () async {

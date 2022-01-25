@@ -3,6 +3,7 @@ import 'package:detail/detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:watchlist/watchlist.dart';
+import 'package:recommendation/recommendation.dart';
 
 class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';

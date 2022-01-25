@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:recommendation/recommendation.dart';
 
 import '../../../../test/helpers/test_helper.mocks.dart';
 
@@ -14,7 +15,7 @@ void main() {
     usecase = GetMovieRecommendations(mockMovieRepository);
   });
 
-  final tId = 1;
+  const tId = 1;
   final tMovies = <Movie>[];
 
   test('should get list of movie recommendations from the repository',

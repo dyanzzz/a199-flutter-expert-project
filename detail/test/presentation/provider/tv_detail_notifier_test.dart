@@ -4,6 +4,7 @@ import 'package:detail/detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:recommendation/recommendation.dart';
 import 'package:watchlist/watchlist.dart';
 
 import '../../../../core/test/dummy_data/dummy_object_tv.dart';

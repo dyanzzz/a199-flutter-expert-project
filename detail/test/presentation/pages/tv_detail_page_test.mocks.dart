@@ -2,12 +2,13 @@
 // in detail/test/presentation/pages/tv_detail_page_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
-import 'dart:ui' as _i6;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i7;
 
-import 'package:core/core.dart' as _i3;
+import 'package:core/core.dart' as _i5;
 import 'package:detail/detail.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:recommendation/recommendation.dart' as _i3;
 import 'package:watchlist/watchlist.dart' as _i4;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,7 +33,7 @@ class _FakeSaveTvWatchlist_3 extends _i1.Fake implements _i4.SaveTvWatchlist {}
 class _FakeRemoveTvWatchlist_4 extends _i1.Fake
     implements _i4.RemoveTvWatchlist {}
 
-class _FakeTvDetail_5 extends _i1.Fake implements _i3.TvDetail {}
+class _FakeTvDetail_5 extends _i1.Fake implements _i5.TvDetail {}
 
 /// A class which mocks [TvDetailNotifier].
 ///
@@ -63,20 +64,20 @@ class MockTvDetailNotifier extends _i1.Mock implements _i2.TvDetailNotifier {
       (super.noSuchMethod(Invocation.getter(#removeTvWatchlist),
           returnValue: _FakeRemoveTvWatchlist_4()) as _i4.RemoveTvWatchlist);
   @override
-  _i3.TvDetail get tv => (super.noSuchMethod(Invocation.getter(#tv),
-      returnValue: _FakeTvDetail_5()) as _i3.TvDetail);
+  _i5.TvDetail get tv => (super.noSuchMethod(Invocation.getter(#tv),
+      returnValue: _FakeTvDetail_5()) as _i5.TvDetail);
   @override
-  _i3.RequestState get tvState =>
+  _i5.RequestState get tvState =>
       (super.noSuchMethod(Invocation.getter(#tvState),
-          returnValue: _i3.RequestState.empty) as _i3.RequestState);
+          returnValue: _i5.RequestState.empty) as _i5.RequestState);
   @override
-  List<_i3.Tv> get tvRecommendations =>
+  List<_i5.Tv> get tvRecommendations =>
       (super.noSuchMethod(Invocation.getter(#tvRecommendations),
-          returnValue: <_i3.Tv>[]) as List<_i3.Tv>);
+          returnValue: <_i5.Tv>[]) as List<_i5.Tv>);
   @override
-  _i3.RequestState get recommendationState =>
+  _i5.RequestState get recommendationState =>
       (super.noSuchMethod(Invocation.getter(#recommendationState),
-          returnValue: _i3.RequestState.empty) as _i3.RequestState);
+          returnValue: _i5.RequestState.empty) as _i5.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')
@@ -94,31 +95,31 @@ class MockTvDetailNotifier extends _i1.Mock implements _i2.TvDetailNotifier {
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i5.Future<void> fetchTVDetail(int? id) =>
+  _i6.Future<void> fetchTVDetail(int? id) =>
       (super.noSuchMethod(Invocation.method(#fetchTVDetail, [id]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> addTvWatchlist(_i3.TvDetail? tv) =>
+  _i6.Future<void> addTvWatchlist(_i5.TvDetail? tv) =>
       (super.noSuchMethod(Invocation.method(#addTvWatchlist, [tv]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> removeTvFromWatchlist(_i3.TvDetail? tv) =>
+  _i6.Future<void> removeTvFromWatchlist(_i5.TvDetail? tv) =>
       (super.noSuchMethod(Invocation.method(#removeTvFromWatchlist, [tv]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> loadTvWatchlistStatus(int? id) =>
+  _i6.Future<void> loadTvWatchlistStatus(int? id) =>
       (super.noSuchMethod(Invocation.method(#loadTvWatchlistStatus, [id]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  void addListener(_i6.VoidCallback? listener) =>
+  void addListener(_i7.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i6.VoidCallback? listener) =>
+  void removeListener(_i7.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override
