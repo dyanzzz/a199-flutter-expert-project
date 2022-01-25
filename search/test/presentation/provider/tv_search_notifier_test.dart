@@ -24,7 +24,7 @@ void main() {
 
   final tTv = Tv(
     backdropPath: '/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg',
-    genreIds: [14, 28],
+    genreIds: const [14, 28],
     id: 88329,
     originalName: 'Hawkeye',
     overview:
@@ -39,7 +39,7 @@ void main() {
     originCountry: ['US'],
   );
   final tTvList = <Tv>[tTv];
-  final tQuery = 'Hawkeye';
+  const tQuery = 'Hawkeye';
 
   group('search tv show', () {
     test('should change state to loading when usecase is called', () async {
