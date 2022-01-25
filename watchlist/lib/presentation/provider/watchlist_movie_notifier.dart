@@ -1,9 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:watchlist/watchlist.dart';
 
-class TvWatchlistNotifier extends ChangeNotifier {
-  var _tvWatchlist = <Tv>[];
-  List<Tv> get tvWatchlist => _tvWatchlist;
+class WatchlistMovieNotifier extends ChangeNotifier {
+  var _watchlistMovies = <Movie>[];
+  List<Movie> get watchlistMovies => _watchlistMovies;
 
   var _watchlistState = RequestState.empty;
   RequestState get watchlistState => _watchlistState;
@@ -11,24 +12,24 @@ class TvWatchlistNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  TvWatchlistNotifier({required this.getTvWatchlist});
+  WatchlistMovieNotifier({required this.getWatchlistMovies});
 
-  final GetTvWatchlist getTvWatchlist;
+  final GetWatchlistMovies getWatchlistMovies;
 
-  Future<void> fetchTvWatchlist() async {
+  Future<void> fetchWatchlistMovies() async {
     _watchlistState = RequestState.loading;
     notifyListeners();
 
-    final result = await getTvWatchlist.execute();
+    final result = await getWatchlistMovies.execute();
     result.fold(
       (failure) {
         _watchlistState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
-      (tvData) {
+      (moviesData) {
         _watchlistState = RequestState.loaded;
-        _tvWatchlist = tvData;
+        _watchlistMovies = moviesData;
         notifyListeners();
       },
     );

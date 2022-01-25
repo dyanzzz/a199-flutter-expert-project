@@ -2,8 +2,9 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:watchlist/watchlist.dart';
 
-import '../../dummy_data/dummy_object_tv.dart';
+import '../../../../core/test/dummy_data/dummy_object_tv.dart';
 import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {

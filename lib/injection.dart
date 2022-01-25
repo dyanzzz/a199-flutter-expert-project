@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:popular/popular.dart';
 import 'package:search/search.dart';
 import 'package:top_rated/top_rated.dart';
+import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
 

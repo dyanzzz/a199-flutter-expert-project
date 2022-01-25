@@ -1,9 +1,9 @@
-import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:watchlist/watchlist.dart';
 
-import '../../dummy_data/dummy_object_tv.dart';
+import '../../../../core/test/dummy_data/dummy_object_tv.dart';
 import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {
@@ -18,11 +18,11 @@ void main() {
   test('should save tv to the repository', () async {
     // arrange
     when(mockRepository.saveWatchList(testTvDetail))
-        .thenAnswer((_) async => Right('Added to Watchlist'));
+        .thenAnswer((_) async => const Right('Added to Watchlist'));
     // act
     final result = await usecase.execute(testTvDetail);
     // assert
     verify(mockRepository.saveWatchList(testTvDetail));
-    expect(result, Right('Added to Watchlist'));
+    expect(result, const Right('Added to Watchlist'));
   });
 }

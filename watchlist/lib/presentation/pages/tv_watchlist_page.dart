@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:watchlist/watchlist.dart';
 
 class TvWatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tv';

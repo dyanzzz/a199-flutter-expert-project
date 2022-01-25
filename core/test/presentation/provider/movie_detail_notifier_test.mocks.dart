@@ -7,6 +7,9 @@ import 'dart:async' as _i4;
 import 'package:core/core.dart' as _i2;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:watchlist/domain/usecases/get_watchlist_status.dart' as _i5;
+import 'package:watchlist/domain/usecases/remove_watchlist.dart' as _i7;
+import 'package:watchlist/domain/usecases/save_watchlist.dart' as _i6;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -66,7 +69,7 @@ class MockGetMovieRecommendations extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatus extends _i1.Mock
-    implements _i2.GetWatchListStatus {
+    implements _i5.GetWatchListStatus {
   MockGetWatchListStatus() {
     _i1.throwOnMissingStub(this);
   }
@@ -84,7 +87,7 @@ class MockGetWatchListStatus extends _i1.Mock
 /// A class which mocks [SaveWatchlist].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveWatchlist extends _i1.Mock implements _i2.SaveWatchlist {
+class MockSaveWatchlist extends _i1.Mock implements _i6.SaveWatchlist {
   MockSaveWatchlist() {
     _i1.throwOnMissingStub(this);
   }
@@ -104,7 +107,7 @@ class MockSaveWatchlist extends _i1.Mock implements _i2.SaveWatchlist {
 /// A class which mocks [RemoveWatchlist].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveWatchlist extends _i1.Mock implements _i2.RemoveWatchlist {
+class MockRemoveWatchlist extends _i1.Mock implements _i7.RemoveWatchlist {
   MockRemoveWatchlist() {
     _i1.throwOnMissingStub(this);
   }
