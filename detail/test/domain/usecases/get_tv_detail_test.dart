@@ -1,9 +1,9 @@
-import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:detail/detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_object_tv.dart';
+import '../../../../core/test/dummy_data/dummy_object_tv.dart';
 import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
     usecase = GetTvDetail(mockRepository);
   });
 
-  final tId = 88329;
+  const tId = 88329;
 
   test('should get tv detail from the repository', () async {
     // arrange

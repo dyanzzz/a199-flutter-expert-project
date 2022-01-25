@@ -1,7 +1,7 @@
-name: core
+name: detail
 description: A new Flutter package project.
 version: 0.0.1
-homepage: core
+homepage: detail
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -11,46 +11,19 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  http: ^0.13.3
-  provider: ^6.0.0
-  dartz: ^0.10.0-nullsafety.2
-  equatable: ^2.0.2
-  google_fonts: ^2.1.0
-  flutter_rating_bar: ^4.0.0
-  cached_network_image: ^3.0.0
-  get_it: ^7.1.3
-  # sqflite: ^2.0.0+3
-  sqflite_sqlcipher: ^2.1.0
-  encrypt: ^5.0.1
-  path_provider: ^2.0.2
-  data_connection_checker:
-    git:
-      url: https://github.com/chornthorn/data_connection_checker.git
-      ref: master
-  firebase_core: ^1.6.0
-  firebase_crashlytics: ^2.4.5
-
-  about:
-    path: ../about
-  search: 
-    path: ../search
-  popular:
-    path: ../popular
-  top_rated:
-    path: ../top_rated
-  watchlist:
-    path: ../watchlist
-  detail:
-    path: ../detail
+  core:
+    path: ../core
+  dartz: ^0.10.0
+  flutter_bloc: ^8.0.0
+  rxdart: ^0.27.3
 
 dev_dependencies:
-  mockito: ^5.0.8
-  build_runner: ^2.0.4
   flutter_test:
     sdk: flutter
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  flutter_lints: ^1.0.0
+  bloc_test: ^9.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,7 +31,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
-  
+
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

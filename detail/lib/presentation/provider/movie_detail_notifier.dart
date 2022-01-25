@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:detail/detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:watchlist/watchlist.dart';

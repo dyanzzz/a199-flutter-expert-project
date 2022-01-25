@@ -42,22 +42,17 @@ export 'package:core/domain/entities/tv.dart';
 export 'package:core/domain/repositories/movie_repository.dart';
 export 'package:core/domain/repositories/tv_repository.dart';
 
-export 'package:core/domain/usecases/get_movie_detail.dart';
+
 export 'package:core/domain/usecases/get_movie_recommendations.dart';
 export 'package:core/domain/usecases/get_now_playing_movies.dart';
-export 'package:core/domain/usecases/get_tv_detail.dart';
 export 'package:core/domain/usecases/get_tv_recommendation.dart';
 export 'package:core/domain/usecases/get_tv_on_the_air.dart';
 
 export 'package:core/presentation/pages/home_movie_page.dart';
-export 'package:core/presentation/pages/movie_detail_page.dart';
 
 export 'package:core/presentation/pages/tv_home_page.dart';
-export 'package:core/presentation/pages/tv_detail_page.dart';
 
 export 'package:core/presentation/provider/movie_list_notifier.dart';
-export 'package:core/presentation/provider/movie_detail_notifier.dart';
-export 'package:core/presentation/provider/tv_detail_notifier.dart';
 export 'package:core/presentation/provider/tv_list_notifier.dart';
 
 export 'package:core/presentation/widgets/movie_card_list.dart';

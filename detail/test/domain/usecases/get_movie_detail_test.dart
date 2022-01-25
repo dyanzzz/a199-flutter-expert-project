@@ -1,9 +1,9 @@
-import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:detail/detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../core/test/dummy_data/dummy_objects.dart';
 import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
     usecase = GetMovieDetail(mockMovieRepository);
   });
 
-  final tId = 1;
+  const tId = 1;
 
   test('should get movie detail from the repository', () async {
     // arrange
