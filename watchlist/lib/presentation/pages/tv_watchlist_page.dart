@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:watchlist/watchlist.dart';
 
@@ -14,9 +15,11 @@ class _TvWatchlistPageState extends State<TvWatchlistPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TvWatchlistNotifier>(context, listen: false)
-            .fetchTvWatchlist());
+    Future.microtask(
+      () =>
+          //Provider.of<TvWatchlistNotifier>(context, listen: false).fetchTvWatchlist(),
+          context.read<WatchlistTvBloc>().add(const OnQueryChanged()),
+    );
   }
 
   @override
@@ -26,21 +29,56 @@ class _TvWatchlistPageState extends State<TvWatchlistPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<TvWatchlistNotifier>(context, listen: false).fetchTvWatchlist();
+    // Provider.of<TvWatchlistNotifier>(context, listen: false).fetchTvWatchlist();
+    context.read<WatchlistTvBloc>().add(const OnQueryChanged());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: const Text('Watchlist'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TvWatchlistNotifier>(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlocBuilder<WatchlistTvBloc, WatchlistState>(
+              builder: (context, state) {
+                if (state is WatchlistLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is WatchlistTvHasData) {
+                  final result = state.result;
+                  return Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final tv = result[index];
+                        return TvCard(tv);
+                      },
+                      itemCount: result.length,
+                    ),
+                  );
+                } else if (state is WatchlistError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
+                  );
+                } else {
+                  return Expanded(child: Container());
+                }
+              },
+            ),
+          ],
+        ),
+        /* child: Consumer<TvWatchlistNotifier>(
           builder: (context, data, child) {
             if (data.watchlistState == RequestState.loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (data.watchlistState == RequestState.loaded) {
@@ -53,12 +91,12 @@ class _TvWatchlistPageState extends State<TvWatchlistPage> with RouteAware {
               );
             } else {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(data.message),
               );
             }
           },
-        ),
+        ), */
       ),
     );
   }

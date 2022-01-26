@@ -97,6 +97,8 @@ void init() {
   locator.registerFactory(() => RecommendationTvBloc(locator()));
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
+  locator.registerFactory(() => WatchlistTvBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
