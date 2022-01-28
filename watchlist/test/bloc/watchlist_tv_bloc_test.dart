@@ -8,14 +8,31 @@ import 'package:watchlist/watchlist.dart';
 
 import 'watchlist_tv_bloc_test.mocks.dart';
 
-@GenerateMocks([GetTvWatchlist])
+@GenerateMocks([
+  GetTvWatchlist,
+  GetTvWatchListStatus,
+  SaveTvWatchlist,
+  RemoveTvWatchlist,
+])
 void main() {
   late WatchlistTvBloc watchlistTvBloc;
   late MockGetTvWatchlist mockGetTvWatchlist;
+  late MockGetTvWatchListStatus mockGetWatchlistStatus;
+  late MockSaveTvWatchlist mockSaveWatchlist;
+  late MockRemoveTvWatchlist mockRemoveWatchlist;
 
   setUp(() {
     mockGetTvWatchlist = MockGetTvWatchlist();
-    watchlistTvBloc = WatchlistTvBloc(mockGetTvWatchlist);
+    mockGetWatchlistStatus = MockGetTvWatchListStatus();
+    mockSaveWatchlist = MockSaveTvWatchlist();
+    mockRemoveWatchlist = MockRemoveTvWatchlist();
+
+    watchlistTvBloc = WatchlistTvBloc(
+      mockGetTvWatchlist,
+      mockGetWatchlistStatus,
+      mockSaveWatchlist,
+      mockRemoveWatchlist,
+    );
   });
 
   final tTv = Tv(
@@ -47,8 +64,8 @@ void main() {
           .thenAnswer((_) async => Right(tTvList));
       return watchlistTvBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged()),
-    wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
+    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       WatchlistTvHasData(tTvList),
@@ -63,8 +80,8 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return watchlistTvBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged()),
-    wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
+    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       const WatchlistError('Server Failure'),

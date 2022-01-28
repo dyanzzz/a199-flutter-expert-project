@@ -6,16 +6,32 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:watchlist/watchlist.dart';
 
-import '../presentation/provider/watchlist_movie_notifier_test.mocks.dart';
+import 'watchlist_movie_bloc_test.mocks.dart';
 
-@GenerateMocks([GetWatchlistMovies])
+@GenerateMocks([
+  GetWatchlistMovies,
+  GetWatchListStatus,
+  SaveWatchlist,
+  RemoveWatchlist,
+])
 void main() {
   late WatchlistMovieBloc watchlistMovieBloc;
   late MockGetWatchlistMovies mockGetWatchlistMovies;
+  late MockGetWatchListStatus mockGetWatchlistStatus;
+  late MockSaveWatchlist mockSaveWatchlist;
+  late MockRemoveWatchlist mockRemoveWatchlist;
 
   setUp(() {
     mockGetWatchlistMovies = MockGetWatchlistMovies();
-    watchlistMovieBloc = WatchlistMovieBloc(mockGetWatchlistMovies);
+    mockGetWatchlistStatus = MockGetWatchListStatus();
+    mockSaveWatchlist = MockSaveWatchlist();
+    mockRemoveWatchlist = MockRemoveWatchlist();
+    watchlistMovieBloc = WatchlistMovieBloc(
+      mockGetWatchlistMovies,
+      mockGetWatchlistStatus,
+      mockSaveWatchlist,
+      mockRemoveWatchlist,
+    );
   });
 
   final tMovie = Movie(
@@ -47,8 +63,8 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged()),
-    wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedDetailMovie()),
+    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       WatchlistMovieHasData(tMovieList),
@@ -63,8 +79,8 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged()),
-    wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedDetailMovie()),
+    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       const WatchlistError('Server Failure'),

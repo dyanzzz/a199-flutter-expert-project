@@ -19,7 +19,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     Future.microtask(
       () =>
           //Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies());
-          context.read<WatchlistMovieBloc>().add(const OnQueryChanged()),
+          context.read<WatchlistMovieBloc>().add(const OnQueryChangedDetailMovie()),
     );
   }
 
@@ -31,7 +31,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   void didPopNext() {
     //Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies();
-    context.read<WatchlistMovieBloc>().add(const OnQueryChanged());
+    context.read<WatchlistMovieBloc>().add(const OnQueryChangedDetailMovie());
   }
 
   @override

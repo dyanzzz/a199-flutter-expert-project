@@ -7,9 +7,45 @@ abstract class WatchlistEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnQueryChanged extends WatchlistEvent {
-  const OnQueryChanged();
+class OnQueryChangedDetailMovie extends WatchlistEvent {
+  const OnQueryChangedDetailMovie();
 
   @override
   List<Object> get props => [];
+}
+
+class OnQueryChangedDetailTv extends WatchlistEvent {
+  const OnQueryChangedDetailTv();
+
+  @override
+  List<Object> get props => [];
+}
+
+class AddMovieWatchlist extends WatchlistEvent {
+  final MovieDetail movieDetail;
+  final String type;
+
+  const AddMovieWatchlist(this.movieDetail, this.type);
+
+  @override
+  List<Object> get props => [movieDetail, type];
+}
+
+class AddTvWatchlist extends WatchlistEvent {
+  final TvDetail tvDetail;
+  final String type;
+
+  const AddTvWatchlist(this.tvDetail, this.type);
+
+  @override
+  List<Object> get props => [tvDetail, type];
+}
+
+class GetWatchlistStatus extends WatchlistEvent {
+  final int id;
+
+  const GetWatchlistStatus(this.id);
+
+  @override
+  List<Object> get props => [id];
 }

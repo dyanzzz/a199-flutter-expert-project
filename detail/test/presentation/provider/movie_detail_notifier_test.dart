@@ -20,7 +20,7 @@ import 'movie_detail_notifier_test.mocks.dart';
 void main() {
   late MovieDetailNotifier provider;
   late MockGetMovieDetail mockGetMovieDetail;
-  // late MockGetMovieRecommendations mockGetMovieRecommendations;
+  late MockGetMovieRecommendations mockGetMovieRecommendations;
   late MockGetWatchListStatus mockGetWatchlistStatus;
   late MockSaveWatchlist mockSaveWatchlist;
   late MockRemoveWatchlist mockRemoveWatchlist;
@@ -29,13 +29,13 @@ void main() {
   setUp(() {
     listenerCallCount = 0;
     mockGetMovieDetail = MockGetMovieDetail();
-    // mockGetMovieRecommendations = MockGetMovieRecommendations();
+    mockGetMovieRecommendations = MockGetMovieRecommendations();
     mockGetWatchlistStatus = MockGetWatchListStatus();
     mockSaveWatchlist = MockSaveWatchlist();
     mockRemoveWatchlist = MockRemoveWatchlist();
     provider = MovieDetailNotifier(
       getMovieDetail: mockGetMovieDetail,
-      // getMovieRecommendations: mockGetMovieRecommendations,
+      getMovieRecommendations: mockGetMovieRecommendations,
       getWatchListStatus: mockGetWatchlistStatus,
       saveWatchlist: mockSaveWatchlist,
       removeWatchlist: mockRemoveWatchlist,
@@ -66,8 +66,8 @@ void main() {
   void _arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
         .thenAnswer((_) async => Right(testMovieDetail));
-    /*  when(mockGetMovieRecommendations.execute(tId))
-        .thenAnswer((_) async => Right(tMovies)); */
+    when(mockGetMovieRecommendations.execute(tId))
+        .thenAnswer((_) async => Right(tMovies));
   }
 
   group('Get Movie Detail', () {
@@ -78,7 +78,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       verify(mockGetMovieDetail.execute(tId));
-      // verify(mockGetMovieRecommendations.execute(tId));
+      verify(mockGetMovieRecommendations.execute(tId));
     });
 
     test('should change state to Loading when usecase is called', () {
@@ -110,11 +110,11 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.loaded);
-      // expect(provider.movieRecommendations, tMovies);
+      expect(provider.movieRecommendations, tMovies);
     });
   });
 
-  /* group('Get Movie Recommendations', () {
+  group('Get Movie Recommendations', () {
     test('should get data from the usecase', () async {
       // arrange
       _arrangeUsecase();
@@ -148,7 +148,7 @@ void main() {
       expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
-  }); */
+  });
 
   group('Watchlist', () {
     test('should get the watchlist status', () async {
@@ -218,8 +218,8 @@ void main() {
       // arrange
       when(mockGetMovieDetail.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      /* when(mockGetMovieRecommendations.execute(tId))
-          .thenAnswer((_) async => Right(tMovies)); */
+      when(mockGetMovieRecommendations.execute(tId))
+          .thenAnswer((_) async => Right(tMovies));
       // act
       await provider.fetchMovieDetail(tId);
       // assert

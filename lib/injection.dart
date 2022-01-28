@@ -24,7 +24,7 @@ void init() {
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
-      // getMovieRecommendations: locator(),
+      getMovieRecommendations: locator(),
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
       removeWatchlist: locator(),
@@ -62,7 +62,7 @@ void init() {
   locator.registerFactory(
     () => TvDetailNotifier(
       getTvDetail: locator(),
-      // getTvRecommendation: locator(),
+      getTvRecommendation: locator(),
       getTvWatchListStatus: locator(),
       saveTvWatchlist: locator(),
       removeTvWatchlist: locator(),
@@ -97,8 +97,16 @@ void init() {
   locator.registerFactory(() => RecommendationTvBloc(locator()));
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
-  locator.registerFactory(() => WatchlistMovieBloc(locator()));
-  locator.registerFactory(() => WatchlistTvBloc(locator()));
+  locator.registerFactory(
+      () => WatchlistMovieBloc(locator(), locator(), locator(), locator()));
+  locator.registerFactory(
+      () => WatchlistTvBloc(locator(), locator(), locator(), locator()));
+  locator
+      .registerFactory(() => DetailMovieBloc(locator(), locator(), locator()));
+  locator.registerFactory(() => DetailTvBloc(locator(), locator(), locator()));
+  // locator.registerFactory(() => AddWatchlistMovieBloc(locator(), locator()));
+  // locator.registerFactory(() => RemoveWatchlistMovieBloc(locator()));
+  // locator.registerFactory(() => GetWatchlistStatusMovieBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

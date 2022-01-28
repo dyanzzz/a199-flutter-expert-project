@@ -37,3 +37,21 @@ class WatchlistTvHasData extends WatchlistState {
   @override
   List<Object> get props => [result];
 }
+
+class AddWatchlistData extends WatchlistState {
+  final String message;
+
+  const AddWatchlistData(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class GetWatchlistStatusData extends WatchlistState {
+  final bool status;
+
+  const GetWatchlistStatusData(this.status);
+
+  @override
+  List<Object> get props => [status];
+}
