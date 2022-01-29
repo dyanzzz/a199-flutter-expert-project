@@ -63,8 +63,7 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChangedDetailMovie()),
-    //wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedWatchlistMovie()),
     expect: () => [
       WatchlistLoading(),
       WatchlistMovieHasData(tMovieList),
@@ -79,8 +78,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return watchlistMovieBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChangedDetailMovie()),
-    //wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedWatchlistMovie()),
     expect: () => [
       WatchlistLoading(),
       const WatchlistError('Server Failure'),

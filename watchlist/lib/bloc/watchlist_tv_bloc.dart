@@ -1,8 +1,6 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:watchlist/domain/usecases/get_tv_watchlist.dart';
 import 'package:watchlist/watchlist.dart';
 
 class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
@@ -27,7 +25,7 @@ class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
     this._saveTvWatchlist,
     this._removeTvWatchlist,
   ) : super(WatchlistEmpty()) {
-    on<OnQueryChangedDetailTv>(
+    on<OnQueryChangedWatchlistMovie>(
       (event, emit) async {
         emit(WatchlistLoading());
 
@@ -71,7 +69,7 @@ class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
           (failure) async {
             _watchlistMessage = failure.message;
 
-            //emit(WatchlistError(failure.message));
+            emit(WatchlistError(failure.message));
           },
           (data) async {
             _watchlistMessage = data;

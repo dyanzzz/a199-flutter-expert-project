@@ -15,13 +15,13 @@ final locator = GetIt.instance;
 
 void init() {
   // provider
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => MovieListNotifier(
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
     ),
-  );
+  ); */
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
@@ -46,20 +46,20 @@ void init() {
       getTopRatedMovies: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
     ),
-  );
+  ); */
 
   // tv show provider
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvListNotifier(
       getTvOnTheAir: locator(),
       getTvPopular: locator(),
       getTvTopRated: locator(),
     ),
-  );
+  ); */
   locator.registerFactory(
     () => TvDetailNotifier(
       getTvDetail: locator(),
@@ -84,11 +84,11 @@ void init() {
       getTvTopRated: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvWatchlistNotifier(
       getTvWatchlist: locator(),
     ),
-  );
+  ); */
   // bloc
   locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(() => SearchTvBloc(locator()));

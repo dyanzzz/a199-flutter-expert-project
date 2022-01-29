@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:watchlist/watchlist.dart';
 
 part 'watchlist_event.dart';
@@ -27,7 +26,7 @@ class WatchlistMovieBloc extends Bloc<WatchlistEvent, WatchlistState> {
   WatchlistMovieBloc(this._watchlistMovies, this._getWatchListStatus,
       this._saveWatchlist, this._removeWatchlist)
       : super(WatchlistEmpty()) {
-    on<OnQueryChangedDetailMovie>(
+    on<OnQueryChangedWatchlistMovie>(
       (event, emit) async {
         emit(WatchlistLoading());
 
@@ -71,7 +70,7 @@ class WatchlistMovieBloc extends Bloc<WatchlistEvent, WatchlistState> {
           (failure) async {
             _watchlistMessage = failure.message;
 
-            //emit(WatchlistError(failure.message));
+            emit(WatchlistError(failure.message));
           },
           (data) async {
             _watchlistMessage = data;

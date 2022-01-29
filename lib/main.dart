@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:core/utils/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,12 @@ https://github.com/Dart-Code/Dart-Code/issues/2764#issuecomment-1001202535
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
+        /* ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
+        ), */
+        /* ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -51,9 +52,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
-        ChangeNotifierProvider(
+        /* ChangeNotifierProvider(
           create: (_) => di.locator<TvListNotifier>(),
-        ),
+        ), */
         ChangeNotifierProvider(
           create: (_) => di.locator<TvDetailNotifier>(),
         ),
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvWatchlistNotifier>(),
-        ),
+        ), */
         // bloc
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
@@ -132,7 +133,7 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MovieDetailPage.ROUTE_NAME:
+            case MOVIE_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
@@ -140,7 +141,7 @@ class MyApp extends StatelessWidget {
               );
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
+            case MOVIE_WATCHLIST_ROUTE:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
 
             case TvHomePage.ROUTE_NAME:
@@ -149,7 +150,7 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => TvPopularPage());
             case TvTopRatedPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => TvTopRatedPage());
-            case TvDetailPage.ROUTE_NAME:
+            case TV_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvDetailPage(id: id),
@@ -157,10 +158,10 @@ class MyApp extends StatelessWidget {
               );
             case TvSearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TvSearchPage());
-            case TvWatchlistPage.ROUTE_NAME:
+            case TV_WATCHLIST_ROUTE:
               return MaterialPageRoute(builder: (_) => TvWatchlistPage());
 
-            case AboutPage.ROUTE_NAME:
+            case ABOUT_ROUTE:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(builder: (_) {

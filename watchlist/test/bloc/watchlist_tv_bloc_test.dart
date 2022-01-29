@@ -65,7 +65,6 @@ void main() {
       return watchlistTvBloc;
     },
     act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
-    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       WatchlistTvHasData(tTvList),
@@ -81,7 +80,6 @@ void main() {
       return watchlistTvBloc;
     },
     act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
-    //wait: const Duration(milliseconds: 500),
     expect: () => [
       WatchlistLoading(),
       const WatchlistError('Server Failure'),
