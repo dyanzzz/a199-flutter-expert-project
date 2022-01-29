@@ -57,3 +57,6 @@ export 'package:core/presentation/widgets/tv_card_list.dart';
 
 export 'package:core/data/repositories/movie_repository_impl.dart';
 export 'package:core/data/repositories/tv_repository_impl.dart';
+
+export 'package:core/bloc/core_movie_bloc.dart';
+export 'package:core/bloc/core_tv_bloc.dart';

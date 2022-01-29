@@ -3,6 +3,7 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
 import 'package:popular/popular.dart';
 import 'package:search/search.dart';
 import 'package:top_rated/top_rated.dart';
@@ -104,9 +105,8 @@ void init() {
   locator
       .registerFactory(() => DetailMovieBloc(locator(), locator(), locator()));
   locator.registerFactory(() => DetailTvBloc(locator(), locator(), locator()));
-  // locator.registerFactory(() => AddWatchlistMovieBloc(locator(), locator()));
-  // locator.registerFactory(() => RemoveWatchlistMovieBloc(locator()));
-  // locator.registerFactory(() => GetWatchlistStatusMovieBloc(locator()));
+  locator.registerFactory(() => CoreMovieBloc(locator(), locator(), locator()));
+  locator.registerFactory(() => CoreTvBloc(locator(), locator(), locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

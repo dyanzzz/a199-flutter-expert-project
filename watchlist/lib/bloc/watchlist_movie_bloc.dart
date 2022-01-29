@@ -76,13 +76,11 @@ class WatchlistMovieBloc extends Bloc<WatchlistEvent, WatchlistState> {
           (data) async {
             _watchlistMessage = data;
 
-            final resultWatchlistStatus =
-                await _getWatchListStatus.execute(event.movieDetail.id);
-            _watchlistStatus = resultWatchlistStatus;
-
             emit(AddWatchlistData(data));
           },
         );
+
+        add(GetWatchlistStatus(event.movieDetail.id));
       },
     );
   }

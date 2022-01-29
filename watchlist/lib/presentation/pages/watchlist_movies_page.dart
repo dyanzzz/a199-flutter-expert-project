@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:watchlist/watchlist.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
@@ -19,7 +18,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     Future.microtask(
       () =>
           //Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies());
-          context.read<WatchlistMovieBloc>().add(const OnQueryChangedDetailMovie()),
+          context
+              .read<WatchlistMovieBloc>()
+              .add(const OnQueryChangedDetailMovie()),
     );
   }
 

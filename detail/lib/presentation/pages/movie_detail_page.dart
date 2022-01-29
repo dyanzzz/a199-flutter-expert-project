@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:watchlist/bloc/watchlist_movie_bloc.dart';
 import 'package:watchlist/watchlist.dart';
+import 'package:logger/logger.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
@@ -213,7 +214,7 @@ class DetailContent extends StatelessWidget {
                               child: BlocBuilder<WatchlistMovieBloc,
                                   WatchlistState>(
                                 builder: (context, state) {
-                                  print("statenya apa ya : $state");
+                                  logger.e("statenya apa ya : $state");
                                   if (state is WatchlistLoading) {
                                     return const Center(
                                       child: CircularProgressIndicator(),
@@ -255,8 +256,7 @@ class DetailContent extends StatelessWidget {
                                         const Text('Watchlist'),
                                       ],
                                     );
-                                  } else if (state
-                                      is GetWatchlistStatusData) {
+                                  } else if (state is GetWatchlistStatusData) {
                                     var status = state.status;
                                     return Row(
                                       mainAxisSize: MainAxisSize.min,

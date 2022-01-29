@@ -76,13 +76,11 @@ class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
           (data) async {
             _watchlistMessage = data;
 
-            final resultWatchlistStatus =
-                await _getTvWatchListStatus.execute(event.tvDetail.id);
-            _watchlistStatus = resultWatchlistStatus;
-
             emit(AddWatchlistData(data));
           },
         );
+
+        add(GetWatchlistStatus(event.tvDetail.id));
       },
     );
   }
