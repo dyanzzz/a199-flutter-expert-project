@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:detail/detail.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -33,6 +35,15 @@ void main() {
     );
   });
 
+  Widget _makeTestableWidget(Widget body) {
+    return BlocProvider<DetailMovieBloc>.value(
+      value: detailMovieBloc,
+      child: MaterialApp(
+        home: body,
+      ),
+    );
+  }
+
   const tId = 1;
 
   final tMovie = MovieDetail(
@@ -49,32 +60,30 @@ void main() {
     voteAverage: 1,
     voteCount: 1,
   );
-  //final tMovies = <MovieDetail>[tMovie];
   final tMovies = <Movie>[testMovie];
-  //final tMoviesWatchlistStatus = Future<bool>;
+  const tMoviesIsWatchlist = true;
 
   test('initial state should be empty', () {
     expect(detailMovieBloc.state, DetailEmpty());
   });
 
-  /* blocTest<DetailMovieBloc, DetailState>(
+  blocTest<DetailMovieBloc, DetailState>(
     'should emits [Loading, HasData] when data is gotten successfully.',
     build: () {
       when(mockGetMovieDetail.execute(tId))
           .thenAnswer((_) async => Right(testMovieDetail));
       when(mockGetWatchListStatus.execute(tId))
-          .thenAnswer((_) async => Right(tMoviesWatchlistStatus));
+          .thenAnswer((_) async => tMoviesIsWatchlist);
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tMovies));
 
       return detailMovieBloc;
     },
     act: (bloc) => bloc.add(const OnQueryChangedDetail(tId)),
-    //wait: const Duration(milliseconds: 500),
     expect: () => [
       DetailLoading(),
-      DetailMovieHasData(tMovie, true, tMovies),
+      DetailMovieHasData(tMovie, tMoviesIsWatchlist, tMovies),
     ],
     verify: (bloc) => verify(mockGetMovieDetail.execute(tId)),
-  ); */
+  );
 }

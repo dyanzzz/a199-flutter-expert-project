@@ -12,10 +12,6 @@ class DetailTvBloc extends Bloc<DetailEvent, DetailState> {
   final GetTvWatchListStatus _getTvWatchListStatus;
   final GetTvRecommendation _getTvRecommendation;
 
-  EventTransformer<T> debounce<T>(Duration duration) {
-    return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
-  }
-
   DetailTvBloc(
       this._getTvDetail, this._getTvWatchListStatus, this._getTvRecommendation)
       : super(DetailEmpty()) {
@@ -56,7 +52,6 @@ class DetailTvBloc extends Bloc<DetailEvent, DetailState> {
           recommendationTv,
         ));
       },
-      transformer: debounce(const Duration(milliseconds: 500)),
     );
   }
 }
