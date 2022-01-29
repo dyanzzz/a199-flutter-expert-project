@@ -1,17 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:core/utils/routes.dart';
 import 'package:detail/detail.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:recommendation/recommendation.dart';
 import 'package:watchlist/watchlist.dart';
 
 class TvDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail_tv';
-
   final int id;
   const TvDetailPage({required this.id});
 
@@ -26,9 +22,6 @@ class _TvDetailPageState extends State<TvDetailPage> {
     Future.microtask(() {
       context.read<DetailTvBloc>().add(OnQueryChangedDetail(widget.id));
       context.read<WatchlistTvBloc>().add(GetWatchlistStatus(widget.id));
-      /* Provider.of<TvDetailNotifier>(context, listen: false).fetchTVDetail(widget.id);
-      Provider.of<TvDetailNotifier>(context, listen: false).loadTvWatchlistStatus(widget.id); */
-      //context.read<RecommendationTvBloc>().add(OnQueryChanged(widget.id));
     });
   }
 
@@ -37,7 +30,6 @@ class _TvDetailPageState extends State<TvDetailPage> {
     return Scaffold(
       body: BlocBuilder<DetailTvBloc, DetailState>(
         builder: (context, state) {
-          //print("$state state...");
           if (state is DetailLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -54,21 +46,6 @@ class _TvDetailPageState extends State<TvDetailPage> {
                 isWatchlist,
               ),
             );
-            /* } else if (state is AddWatchlistMovieData) {
-            var message = state.movie;
-            if (message == MovieDetailNotifier.watchlistAddSuccessMessage ||
-                message == MovieDetailNotifier.watchlistRemoveSuccessMessage) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(message)));
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content: Text(message),
-                    );
-                  });
-            } */
           } else if (state is DetailError) {
             return SafeArea(
               child: Center(
@@ -82,26 +59,6 @@ class _TvDetailPageState extends State<TvDetailPage> {
           }
         },
       ),
-      /* body: Consumer<TvDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.tvState == RequestState.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (provider.tvState == RequestState.loaded) {
-            final tv = provider.tv;
-            return SafeArea(
-              child: DetailContentTv(
-                tv,
-                // provider.tvRecommendations,
-                provider.isAddedToWatchlist,
-              ),
-            );
-          } else {
-            return Text(provider.message);
-          }
-        },
-      ), */
     );
   }
 }
@@ -170,38 +127,6 @@ class DetailContentTv extends StatelessWidget {
                                       AddTvWatchlist(
                                           tv, WatchlistTvBloc.actionRemove));
                                 }
-                                /* if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(context,
-                                          listen: false)
-                                      .addTvWatchlist(tv);
-                                } else {
-                                  await Provider.of<TvDetailNotifier>(context,
-                                          listen: false)
-                                      .removeTvFromWatchlist(tv);
-                                }
-
-                                final message = Provider.of<TvDetailNotifier>(
-                                        context,
-                                        listen: false)
-                                    .watchlistMessage;
-
-                                if (message ==
-                                        TvDetailNotifier
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        TvDetailNotifier
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
-                                } */
                               },
                               child:
                                   BlocBuilder<WatchlistTvBloc, WatchlistState>(
@@ -328,16 +253,6 @@ class DetailContentTv extends StatelessWidget {
                                   );
                                 } else if (state is DetailTvHasData) {
                                   final result = state.getTvRecommendations;
-                                  /* return Expanded(
-                                    child: ListView.builder(
-                                      padding: const EdgeInsets.all(8),
-                                      itemBuilder: (context, index) {
-                                        final movie = result[index];
-                                        return MovieCard(movie);
-                                      },
-                                      itemCount: result.length,
-                                    ),
-                                  ); */
 
                                   return Container(
                                     height: 150,
@@ -351,7 +266,7 @@ class DetailContentTv extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                TvDetailPage.ROUTE_NAME,
+                                                TV_DETAIL_ROUTE,
                                                 arguments: tv.id,
                                               );
                                             },
@@ -390,63 +305,6 @@ class DetailContentTv extends StatelessWidget {
                                 }
                               },
                             ),
-                            /* Consumer<TvDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.loading) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (data.recommendationState ==
-                                    RequestState.error) {
-                                  return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.loaded) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final tv = recommendation[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                TvDetailPage.ROUTE_NAME,
-                                                arguments: tv.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    const Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: recommendation.length,
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ), */
                           ],
                         ),
                       ),

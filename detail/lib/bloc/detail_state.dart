@@ -57,32 +57,3 @@ class DetailTvHasData extends DetailState {
         getTvRecommendations,
       ];
 }
-
-// new
-/* class AddWatchlistMovieData extends DetailState {
-  final String movie;
-
-  const AddWatchlistMovieData(this.movie);
-
-  @override
-  List<Object> get props => [movie];
-}
-
-/* class RemoveWatchlistMovieData extends DetailState {
-  final String movie;
-
-  const RemoveWatchlistMovieData(this.movie);
-
-  @override
-  List<Object> get props => [movie];
-} */
-
-class GetWatchlistStatusMovieData extends DetailState {
-  final bool movie;
-
-  const GetWatchlistStatusMovieData(this.movie);
-
-  @override
-  List<Object> get props => [movie];
-}
- */

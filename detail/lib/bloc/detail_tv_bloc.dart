@@ -2,10 +2,7 @@ import 'package:core/core.dart';
 import 'package:detail/detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recommendation/recommendation.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:watchlist/watchlist.dart';
-
-import 'detail_movie_bloc.dart';
 
 class DetailTvBloc extends Bloc<DetailEvent, DetailState> {
   final GetTvDetail _getTvDetail;

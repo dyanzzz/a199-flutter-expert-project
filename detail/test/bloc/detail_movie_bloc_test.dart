@@ -2,8 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:detail/detail.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -34,15 +32,6 @@ void main() {
       mockGetMovieRecommendations,
     );
   });
-
-  Widget _makeTestableWidget(Widget body) {
-    return BlocProvider<DetailMovieBloc>.value(
-      value: detailMovieBloc,
-      child: MaterialApp(
-        home: body,
-      ),
-    );
-  }
 
   const tId = 1;
 
