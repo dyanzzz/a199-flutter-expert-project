@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+/* import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:popular/popular.dart';
 import 'package:top_rated/top_rated.dart';
@@ -92,3 +92,4 @@ class TvListNotifier extends ChangeNotifier {
     );
   }
 }
+ */

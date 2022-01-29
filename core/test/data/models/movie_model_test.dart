@@ -5,7 +5,7 @@ void main() {
   final tMovieModel = MovieModel(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',
@@ -21,7 +21,7 @@ void main() {
   final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
+    genreIds: const [1, 2, 3],
     id: 1,
     originalTitle: 'originalTitle',
     overview: 'overview',

@@ -46,7 +46,6 @@ export 'package:core/domain/usecases/get_now_playing_movies.dart';
 export 'package:core/domain/usecases/get_tv_on_the_air.dart';
 
 export 'package:core/presentation/pages/home_movie_page.dart';
-
 export 'package:core/presentation/pages/tv_home_page.dart';
 
 export 'package:core/presentation/provider/movie_list_notifier.dart';
