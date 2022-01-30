@@ -1,12 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:top_rated/top_rated.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-movie';
-
   @override
   _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
 }
@@ -15,9 +12,8 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        //Provider.of<TopRatedMoviesNotifier>(context, listen: false).fetchTopRatedMovies());
-        context.read<TopRatedMovieBloc>().add(const OnQueryChanged()));
+    Future.microtask(
+        () => context.read<TopRatedMovieBloc>().add(const OnQueryChanged()));
   }
 
   @override
@@ -52,6 +48,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 } else if (state is TopRatedError) {
                   return Expanded(
                     child: Center(
+                      key: const Key('error_message'),
                       child: Text(state.message),
                     ),
                   );
@@ -62,28 +59,6 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
             ),
           ],
         ),
-        /* child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.movies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.movies.length,
-              );
-            } else {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(data.message),
-              );
-            }
-          },
-        ), */
       ),
     );
   }

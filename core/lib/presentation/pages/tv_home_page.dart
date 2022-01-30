@@ -148,8 +148,7 @@ class _TvHomePageState extends State<TvHomePage> {
               ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TvTopRatedPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, TV_TOP_RATED_ROUTE),
               ),
               BlocBuilder<CoreTvBloc, CoreState>(
                 builder: (context, state) {

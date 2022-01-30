@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+/* import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:top_rated/top_rated.dart';
 
@@ -36,3 +36,4 @@ class TvTopRatedNotifier extends ChangeNotifier {
     );
   }
 }
+ */

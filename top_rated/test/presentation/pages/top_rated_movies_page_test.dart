@@ -1,24 +1,24 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 import 'package:top_rated/top_rated.dart';
 
+import '../../../../core/test/dummy_data/dummy_objects.dart';
 import 'top_rated_movies_page_test.mocks.dart';
 
-@GenerateMocks([TopRatedMoviesNotifier])
+@GenerateMocks([TopRatedMovieBloc])
 void main() {
-  late MockTopRatedMoviesNotifier mockNotifier;
+  late MockTopRatedMovieBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockTopRatedMoviesNotifier();
+    mockBloc = MockTopRatedMovieBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<TopRatedMovieBloc>.value(
+      value: mockBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -27,7 +27,8 @@ void main() {
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.loading);
+    when(mockBloc.stream).thenAnswer((_) => Stream.value(TopRatedLoading()));
+    when(mockBloc.state).thenReturn(TopRatedLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -40,8 +41,9 @@ void main() {
 
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.loaded);
-    when(mockNotifier.movies).thenReturn(<Movie>[]);
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedMovieHasData(testMovieList)));
+    when(mockBloc.state).thenReturn(TopRatedMovieHasData(testMovieList));
 
     final listViewFinder = find.byType(ListView);
 
@@ -52,10 +54,11 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.error);
-    when(mockNotifier.message).thenReturn('Error message');
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(const TopRatedError('Error Message')));
+    when(mockBloc.state).thenReturn(const TopRatedError('Error Message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
     await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 

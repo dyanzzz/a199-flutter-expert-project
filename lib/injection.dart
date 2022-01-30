@@ -41,11 +41,11 @@ void init() {
       locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TopRatedMoviesNotifier(
       getTopRatedMovies: locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
@@ -79,11 +79,11 @@ void init() {
       locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvTopRatedNotifier(
       getTvTopRated: locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => TvWatchlistNotifier(
       getTvWatchlist: locator(),

@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:top_rated/top_rated.dart';
 
-import '../presentation/provider/tv_list_notifier_test.mocks.dart';
+import 'top_rated_tv_bloc_test.mocks.dart';
 
 @GenerateMocks([GetTvTopRated])
 void main() {
