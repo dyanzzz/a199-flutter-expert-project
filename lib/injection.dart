@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:core/core.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:popular/popular.dart';
 import 'package:search/search.dart';
@@ -8,10 +9,11 @@ import 'package:top_rated/top_rated.dart';
 import 'package:watchlist/watchlist.dart';
 import 'package:detail/detail.dart';
 import 'package:recommendation/recommendation.dart';
+import 'package:http/io_client.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+void init(HttpClient httpClient) {
   // bloc
   locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(() => SearchTvBloc(locator()));
@@ -90,6 +92,6 @@ void init() {
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => IOClient(httpClient));
   locator.registerLazySingleton(() => DataConnectionChecker());
 }

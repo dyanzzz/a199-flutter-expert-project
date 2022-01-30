@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:core/core.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getOnTheAirTvShow();
@@ -12,10 +12,7 @@ abstract class TvRemoteDataSource {
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
-  static const API_KEY = 'api_key=03b8bc1a8bedee74ec1f1fd81b3b39ff';
-  static const BASE_URL = 'https://api.themoviedb.org/3';
-
-  final http.Client client;
+  final IOClient client;
 
   TvRemoteDataSourceImpl({
     required this.client,

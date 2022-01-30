@@ -4,6 +4,8 @@ export 'package:core/utils/constants.dart';
 export 'package:core/utils/exception.dart';
 export 'package:core/utils/failure.dart';
 export 'package:core/utils/state_enum.dart';
+export 'package:core/utils/routes.dart';
+export 'package:core/utils/ssl.dart';
 
 export 'package:core/styles/color.dart';
 export 'package:core/styles/text_styles.dart';
