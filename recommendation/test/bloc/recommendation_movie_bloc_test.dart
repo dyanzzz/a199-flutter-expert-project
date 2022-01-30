@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:recommendation/domain/usecases/get_movie_recommendations.dart';
 import 'package:recommendation/recommendation.dart';
 
 import 'recommendation_movie_bloc_test.mocks.dart';

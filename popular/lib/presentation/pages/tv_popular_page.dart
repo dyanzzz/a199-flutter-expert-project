@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
-import 'package:provider/provider.dart';
 
 class TvPopularPage extends StatefulWidget {
   static const ROUTE_NAME = '/populat_tv';
@@ -15,9 +14,8 @@ class _TvPopularPageState extends State<TvPopularPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        //Provider.of<TvPopularNotifier>(context, listen: false).fetchTvPopular());
-        context.read<PopularTvBloc>().add(const OnQueryChanged()));
+    Future.microtask(
+        () => context.read<PopularTvBloc>().add(const OnQueryChanged()));
   }
 
   @override
@@ -52,6 +50,7 @@ class _TvPopularPageState extends State<TvPopularPage> {
                 } else if (state is PopularError) {
                   return Expanded(
                     child: Center(
+                      key: const Key('error_message'),
                       child: Text(state.message),
                     ),
                   );
@@ -62,28 +61,6 @@ class _TvPopularPageState extends State<TvPopularPage> {
             ),
           ],
         ),
-        /* child: Consumer<TvPopularNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final tv = data.tv[index];
-                  return TvCard(tv);
-                },
-                itemCount: data.tv.length,
-              );
-            } else {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(data.message),
-              );
-            }
-          },
-        ), */
       ),
     );
   }

@@ -10,10 +10,6 @@ part 'popular_state.dart';
 class PopularMovieBloc extends Bloc<PopularEvent, PopularState> {
   final GetPopularMovies _popularMovies;
 
-  EventTransformer<T> debounce<T>(Duration duration) {
-    return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
-  }
-
   PopularMovieBloc(this._popularMovies) : super(PopularEmpty()) {
     on<OnQueryChanged>(
       (event, emit) async {
@@ -30,7 +26,6 @@ class PopularMovieBloc extends Bloc<PopularEvent, PopularState> {
           },
         );
       },
-      transformer: debounce(const Duration(milliseconds: 500)),
     );
   }
 }

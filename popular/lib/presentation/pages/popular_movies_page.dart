@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
-import 'package:provider/provider.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
@@ -15,9 +14,8 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        //Provider.of<PopularMoviesNotifier>(context, listen: false).fetchPopularMovies());
-        context.read<PopularMovieBloc>().add(const OnQueryChanged()));
+    Future.microtask(
+        () => context.read<PopularMovieBloc>().add(const OnQueryChanged()));
   }
 
   @override
@@ -52,6 +50,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 } else if (state is PopularError) {
                   return Expanded(
                     child: Center(
+                      key: const Key('error_message'),
                       child: Text(state.message),
                     ),
                   );
@@ -62,28 +61,6 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
             ),
           ],
         ),
-        /* child: Consumer<PopularMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.movies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.movies.length,
-              );
-            } else {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(data.message),
-              );
-            }
-          },
-        ), */
       ),
     );
   }

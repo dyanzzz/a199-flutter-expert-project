@@ -36,11 +36,11 @@ void init() {
       searchMovies: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => TopRatedMoviesNotifier(
       getTopRatedMovies: locator(),
@@ -74,11 +74,11 @@ void init() {
       searchTv: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvPopularNotifier(
       locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => TvTopRatedNotifier(
       getTvTopRated: locator(),
