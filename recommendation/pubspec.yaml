@@ -13,6 +13,11 @@ dependencies:
 
   core:
     path: ../core
+  detail:
+    path: ../detail
+  watchlist:
+    path: ../watchlist
+    
   dartz: ^0.10.0
   flutter_bloc: ^8.0.0
   rxdart: ^0.27.3

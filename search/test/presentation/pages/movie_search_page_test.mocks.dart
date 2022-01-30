@@ -2,10 +2,9 @@
 // in search/test/presentation/pages/movie_search_page_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
-import 'dart:ui' as _i5;
+import 'dart:async' as _i3;
 
-import 'package:core/core.dart' as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:search/search.dart' as _i2;
 
@@ -18,54 +17,71 @@ import 'package:search/search.dart' as _i2;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeSearchMovies_0 extends _i1.Fake implements _i2.SearchMovies {}
+class _FakeSearchState_0 extends _i1.Fake implements _i2.SearchState {}
 
-/// A class which mocks [MovieSearchNotifier].
+/// A class which mocks [SearchBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieSearchNotifier extends _i1.Mock
-    implements _i2.MovieSearchNotifier {
-  MockMovieSearchNotifier() {
+class MockSearchBloc extends _i1.Mock implements _i2.SearchBloc {
+  MockSearchBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.SearchMovies get searchMovies =>
-      (super.noSuchMethod(Invocation.getter(#searchMovies),
-          returnValue: _FakeSearchMovies_0()) as _i2.SearchMovies);
+  _i2.SearchState get state => (super.noSuchMethod(Invocation.getter(#state),
+      returnValue: _FakeSearchState_0()) as _i2.SearchState);
   @override
-  _i3.RequestState get state => (super.noSuchMethod(Invocation.getter(#state),
-      returnValue: _i3.RequestState.empty) as _i3.RequestState);
+  _i3.Stream<_i2.SearchState> get stream =>
+      (super.noSuchMethod(Invocation.getter(#stream),
+              returnValue: Stream<_i2.SearchState>.empty())
+          as _i3.Stream<_i2.SearchState>);
   @override
-  List<_i3.Movie> get searchResult =>
-      (super.noSuchMethod(Invocation.getter(#searchResult),
-          returnValue: <_i3.Movie>[]) as List<_i3.Movie>);
-  @override
-  String get message =>
-      (super.noSuchMethod(Invocation.getter(#message), returnValue: '')
-          as String);
-  @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+  bool get isClosed =>
+      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
           as bool);
   @override
-  _i4.Future<void> fetchMovieSearch(String? query) =>
-      (super.noSuchMethod(Invocation.method(#fetchMovieSearch, [query]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  _i4.EventTransformer<T> debounce<T>(Duration? duration) =>
+      (super.noSuchMethod(Invocation.method(#debounce, [duration]),
+          returnValue: (_i3.Stream<T> events, _i4.EventMapper<T> mapper) =>
+              Stream<T>.empty()) as _i4.EventTransformer<T>);
   @override
-  void addListener(_i5.VoidCallback? listener) =>
-      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+  void add(_i2.SearchEvent? event) =>
+      super.noSuchMethod(Invocation.method(#add, [event]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i5.VoidCallback? listener) =>
-      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+  void onEvent(_i2.SearchEvent? event) =>
+      super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
-      returnValueForMissingStub: null);
+  void emit(_i2.SearchState? state) =>
+      super.noSuchMethod(Invocation.method(#emit, [state]),
+          returnValueForMissingStub: null);
   @override
-  void notifyListeners() =>
-      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+  void on<E extends _i2.SearchEvent>(
+          _i4.EventHandler<E, _i2.SearchState>? handler,
+          {_i4.EventTransformer<E>? transformer}) =>
+      super.noSuchMethod(
+          Invocation.method(#on, [handler], {#transformer: transformer}),
+          returnValueForMissingStub: null);
+  @override
+  void onTransition(
+          _i4.Transition<_i2.SearchEvent, _i2.SearchState>? transition) =>
+      super.noSuchMethod(Invocation.method(#onTransition, [transition]),
+          returnValueForMissingStub: null);
+  @override
+  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+  @override
+  void onChange(_i4.Change<_i2.SearchState>? change) =>
+      super.noSuchMethod(Invocation.method(#onChange, [change]),
+          returnValueForMissingStub: null);
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) =>
+      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
+          returnValueForMissingStub: null);
+  @override
+  void onError(Object? error, StackTrace? stackTrace) =>
+      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
           returnValueForMissingStub: null);
 }

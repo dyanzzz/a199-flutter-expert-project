@@ -63,7 +63,7 @@ void main() {
   });
 
   group('get tv detail by id', () {
-    final id = 1;
+    const id = 1;
 
     test('should return Tv Detail Table when data is found', () async {
       //arrange

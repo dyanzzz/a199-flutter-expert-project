@@ -4,6 +4,8 @@ export 'package:core/utils/constants.dart';
 export 'package:core/utils/exception.dart';
 export 'package:core/utils/failure.dart';
 export 'package:core/utils/state_enum.dart';
+export 'package:core/utils/routes.dart';
+export 'package:core/utils/ssl.dart';
 
 export 'package:core/styles/color.dart';
 export 'package:core/styles/text_styles.dart';
@@ -46,14 +48,13 @@ export 'package:core/domain/usecases/get_now_playing_movies.dart';
 export 'package:core/domain/usecases/get_tv_on_the_air.dart';
 
 export 'package:core/presentation/pages/home_movie_page.dart';
-
 export 'package:core/presentation/pages/tv_home_page.dart';
-
-export 'package:core/presentation/provider/movie_list_notifier.dart';
-export 'package:core/presentation/provider/tv_list_notifier.dart';
 
 export 'package:core/presentation/widgets/movie_card_list.dart';
 export 'package:core/presentation/widgets/tv_card_list.dart';
 
 export 'package:core/data/repositories/movie_repository_impl.dart';
 export 'package:core/data/repositories/tv_repository_impl.dart';
+
+export 'package:core/bloc/core_movie_bloc.dart';
+export 'package:core/bloc/core_tv_bloc.dart';

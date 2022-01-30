@@ -1,13 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:search/bloc/search_bloc.dart';
 import 'package:search/search.dart';
 
 class SearchPage extends StatelessWidget {
-  static const ROUTE_NAME = '/search';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +17,6 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              /* onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
-              }, */
               // bloc
               onChanged: (query) {
                 context.read<SearchBloc>().add(OnQueryChanged(query));
@@ -39,31 +33,7 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            /* Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
-                        return MovieCard(movie);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ), */
+
             // bloc
             BlocBuilder<SearchBloc, SearchState>(
               builder: (context, state) {

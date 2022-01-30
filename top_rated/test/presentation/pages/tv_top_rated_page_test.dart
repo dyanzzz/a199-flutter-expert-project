@@ -1,24 +1,24 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 import 'package:top_rated/top_rated.dart';
 
+import '../../../../core/test/dummy_data/dummy_object_tv.dart';
 import 'tv_top_rated_page_test.mocks.dart';
 
-@GenerateMocks([TvTopRatedNotifier])
+@GenerateMocks([TopRatedTvBloc])
 void main() {
-  late MockTvTopRatedNotifier mockTvTopRatedNotifier;
+  late MockTopRatedTvBloc mockBloc;
 
   setUp(() {
-    mockTvTopRatedNotifier = MockTvTopRatedNotifier();
+    mockBloc = MockTopRatedTvBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvTopRatedNotifier>.value(
-      value: mockTvTopRatedNotifier,
+    return BlocProvider<TopRatedTvBloc>.value(
+      value: mockBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -27,7 +27,8 @@ void main() {
 
   testWidgets('page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(mockTvTopRatedNotifier.state).thenReturn(RequestState.loading);
+    when(mockBloc.stream).thenAnswer((_) => Stream.value(TopRatedLoading()));
+    when(mockBloc.state).thenReturn(TopRatedLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -40,8 +41,9 @@ void main() {
 
   testWidgets('page should display when data is loaded',
       (WidgetTester tester) async {
-    when(mockTvTopRatedNotifier.state).thenReturn(RequestState.loaded);
-    when(mockTvTopRatedNotifier.tv).thenReturn(<Tv>[]);
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedTvHasData(testTvList)));
+    when(mockBloc.state).thenReturn(TopRatedTvHasData(testTvList));
 
     final listViewFinder = find.byType(ListView);
 
@@ -52,10 +54,11 @@ void main() {
 
   testWidgets('page should display text with message when error',
       (WidgetTester tester) async {
-    when(mockTvTopRatedNotifier.state).thenReturn(RequestState.error);
-    when(mockTvTopRatedNotifier.message).thenReturn('Error message');
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(const TopRatedError('Error Message')));
+    when(mockBloc.state).thenReturn(const TopRatedError('Error Message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
     await tester.pumpWidget(_makeTestableWidget(TvTopRatedPage()));
 

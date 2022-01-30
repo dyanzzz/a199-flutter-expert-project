@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 
 import 'tv_search_page_test.mocks.dart';
 
-@GenerateMocks([TvSearchNotifier])
+@GenerateMocks([SearchTvBloc])
 void main() {
-  late MockTvSearchNotifier mockTvSearchNotifier;
+  late MockSearchTvBloc mockSearchTvBloc;
 
   setUp(() {
-    mockTvSearchNotifier = MockTvSearchNotifier();
+    mockSearchTvBloc = MockSearchTvBloc();
   });
 
   Widget _createApp(Widget child) {
-    return ChangeNotifierProvider<TvSearchNotifier>.value(
-      value: mockTvSearchNotifier,
+    return BlocProvider<SearchTvBloc>.value(
+      value: mockSearchTvBloc,
       child: MaterialApp(
         home: Scaffold(
           body: child,

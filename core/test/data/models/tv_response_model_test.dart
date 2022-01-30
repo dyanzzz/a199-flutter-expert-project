@@ -9,10 +9,10 @@ void main() {
   final testTvModel = TvModel(
       backdropPath: "/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg",
       firstAirDate: '2021-11-24',
-      genreIds: [10759, 18],
+      genreIds: const [10759, 18],
       id: 88329,
       name: "Hawkeye",
-      originCountry: ["US"],
+      originCountry: const ["US"],
       originalLanguage: "en",
       originalName: "Hawkeye",
       overview:

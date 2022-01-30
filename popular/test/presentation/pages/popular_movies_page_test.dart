@@ -1,24 +1,24 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:popular/popular.dart';
-import 'package:provider/provider.dart';
 
+import '../../../../core/test/dummy_data/dummy_objects.dart';
 import 'popular_movies_page_test.mocks.dart';
 
-@GenerateMocks([PopularMoviesNotifier])
+@GenerateMocks([PopularMovieBloc])
 void main() {
-  late MockPopularMoviesNotifier mockNotifier;
+  late MockPopularMovieBloc mockBloc;
 
   setUp(() {
-    mockNotifier = MockPopularMoviesNotifier();
+    mockBloc = MockPopularMovieBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<PopularMoviesNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<PopularMovieBloc>.value(
+      value: mockBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -27,7 +27,8 @@ void main() {
 
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.loading);
+    when(mockBloc.stream).thenAnswer((_) => Stream.value(PopularLoading()));
+    when(mockBloc.state).thenReturn(PopularLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -40,8 +41,9 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.loaded);
-    when(mockNotifier.movies).thenReturn(<Movie>[]);
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularMovieHasData(testMovieList)));
+    when(mockBloc.state).thenReturn(PopularMovieHasData(testMovieList));
 
     final listViewFinder = find.byType(ListView);
 
@@ -52,10 +54,11 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.error);
-    when(mockNotifier.message).thenReturn('Error message');
+    when(mockBloc.stream)
+        .thenAnswer((_) => Stream.value(const PopularError('Error Message')));
+    when(mockBloc.state).thenReturn(const PopularError('Error Message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
     await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
