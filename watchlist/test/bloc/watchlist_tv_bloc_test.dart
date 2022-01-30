@@ -64,7 +64,7 @@ void main() {
           .thenAnswer((_) async => Right(tTvList));
       return watchlistTvBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
+    act: (bloc) => bloc.add(const OnQueryChangedWatchlistMovie()),
     expect: () => [
       WatchlistLoading(),
       WatchlistTvHasData(tTvList),
@@ -79,7 +79,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return watchlistTvBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChangedDetailTv()),
+    act: (bloc) => bloc.add(const OnQueryChangedWatchlistMovie()),
     expect: () => [
       WatchlistLoading(),
       const WatchlistError('Server Failure'),

@@ -1,13 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
-import 'package:rxdart/rxdart.dart';
 
 class PopularTvBloc extends Bloc<PopularEvent, PopularState> {
   final GetTvPopular _popularTvShow;
-
-  EventTransformer<T> debounce<T>(Duration duration) {
-    return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
-  }
 
   PopularTvBloc(this._popularTvShow) : super(PopularEmpty()) {
     on<OnQueryChanged>(
@@ -25,7 +20,6 @@ class PopularTvBloc extends Bloc<PopularEvent, PopularState> {
           },
         );
       },
-      transformer: debounce(const Duration(milliseconds: 500)),
     );
   }
 }

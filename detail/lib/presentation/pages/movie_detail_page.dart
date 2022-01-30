@@ -132,7 +132,6 @@ class DetailContent extends StatelessWidget {
                               child: BlocBuilder<WatchlistMovieBloc,
                                   WatchlistState>(
                                 builder: (context, state) {
-                                  logger.e("statenya apa ya : $state");
                                   if (state is WatchlistLoading) {
                                     return const Center(
                                       child: CircularProgressIndicator(),

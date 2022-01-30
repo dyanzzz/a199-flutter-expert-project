@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
 
 class TvPopularPage extends StatefulWidget {
-  static const ROUTE_NAME = '/populat_tv';
-
   @override
   _TvPopularPageState createState() => _TvPopularPageState();
 }

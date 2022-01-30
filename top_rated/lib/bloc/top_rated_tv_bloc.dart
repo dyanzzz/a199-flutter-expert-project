@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:top_rated/domain/usecases/get_tv_top_rated.dart';
 import 'package:top_rated/top_rated.dart';
 
 class TopRatedTvBloc extends Bloc<TopRatedEvent, TopRatedState> {

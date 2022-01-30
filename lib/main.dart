@@ -6,9 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
-import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
-import 'package:recommendation/recommendation.dart';
 import 'package:search/search.dart';
 import 'package:top_rated/top_rated.dart';
 import 'package:watchlist/watchlist.dart';
@@ -34,42 +32,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        /* ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ), */
-        /* ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        /* ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
-        ), */
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvTopRatedNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvPopularNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvWatchlistNotifier>(),
-        ), */
         // bloc
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
@@ -83,12 +45,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<TopRatedTvBloc>(),
         ),
-        /* BlocProvider(
-          create: (_) => di.locator<RecommendationMovieBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<RecommendationTvBloc>(),
-        ), */
         BlocProvider(
           create: (_) => di.locator<PopularMovieBloc>(),
         ),
@@ -127,9 +83,9 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case HomeMoviePage.ROUTE_NAME:
+            case MOVIE_HOME_ROUTE:
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
-            case PopularMoviesPage.ROUTE_NAME:
+            case MOVIE_POPULAR_ROUTE:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case MOVIE_TOP_RATED_ROUTE:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
@@ -139,14 +95,14 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case SearchPage.ROUTE_NAME:
+            case SEARCH_ROUTE:
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case MOVIE_WATCHLIST_ROUTE:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
 
-            case TvHomePage.ROUTE_NAME:
+            case TV_HOME_ROUTE:
               return MaterialPageRoute(builder: (_) => TvHomePage());
-            case TvPopularPage.ROUTE_NAME:
+            case TV_POPULAR_ROUTE:
               return MaterialPageRoute(builder: (_) => TvPopularPage());
             case TV_TOP_RATED_ROUTE:
               return MaterialPageRoute(builder: (_) => TvTopRatedPage());
@@ -156,7 +112,7 @@ class MyApp extends StatelessWidget {
                 builder: (_) => TvDetailPage(id: id),
                 settings: settings,
               );
-            case TvSearchPage.ROUTE_NAME:
+            case TV_SEARCH_ROUTE:
               return CupertinoPageRoute(builder: (_) => TvSearchPage());
             case TV_WATCHLIST_ROUTE:
               return MaterialPageRoute(builder: (_) => TvWatchlistPage());

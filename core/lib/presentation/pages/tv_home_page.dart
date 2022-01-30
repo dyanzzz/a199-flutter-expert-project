@@ -1,18 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/utils/routes.dart';
-import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popular/popular.dart';
-import 'package:about/about.dart';
-import 'package:search/search.dart';
-import 'package:top_rated/top_rated.dart';
-import 'package:watchlist/watchlist.dart';
 
 class TvHomePage extends StatefulWidget {
-  static const ROUTE_NAME = '/home-tv';
-
   @override
   _TvHomePageState createState() => _TvHomePageState();
 }
@@ -44,7 +36,7 @@ class _TvHomePageState extends State<TvHomePage> {
               title: const Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME);
+                Navigator.pushNamed(context, MOVIE_HOME_ROUTE);
               },
             ),
             ListTile(
@@ -78,7 +70,7 @@ class _TvHomePageState extends State<TvHomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, TV_SEARCH_ROUTE);
             },
             icon: const Icon(Icons.search),
           )
@@ -120,8 +112,7 @@ class _TvHomePageState extends State<TvHomePage> {
               ),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, TvPopularPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, TV_POPULAR_ROUTE),
               ),
               BlocBuilder<CoreTvBloc, CoreState>(
                 builder: (context, state) {

@@ -1,9 +1,7 @@
 import 'package:core/core.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
 import 'package:popular/popular.dart';
 import 'package:search/search.dart';
 import 'package:top_rated/top_rated.dart';
@@ -14,88 +12,11 @@ import 'package:recommendation/recommendation.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // provider
-  /* locator.registerFactory(
-    () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
-  ); */
-  locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
-  );
-  /* locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => PopularMoviesNotifier(
-      locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => TopRatedMoviesNotifier(
-      getTopRatedMovies: locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  ); */
-
-  // tv show provider
-  /* locator.registerFactory(
-    () => TvListNotifier(
-      getTvOnTheAir: locator(),
-      getTvPopular: locator(),
-      getTvTopRated: locator(),
-    ),
-  ); */
-  locator.registerFactory(
-    () => TvDetailNotifier(
-      getTvDetail: locator(),
-      getTvRecommendation: locator(),
-      getTvWatchListStatus: locator(),
-      saveTvWatchlist: locator(),
-      removeTvWatchlist: locator(),
-    ),
-  );
-  /* locator.registerFactory(
-    () => TvSearchNotifier(
-      searchTv: locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => TvPopularNotifier(
-      locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => TvTopRatedNotifier(
-      getTvTopRated: locator(),
-    ),
-  ); */
-  /* locator.registerFactory(
-    () => TvWatchlistNotifier(
-      getTvWatchlist: locator(),
-    ),
-  ); */
   // bloc
   locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(() => SearchTvBloc(locator()));
   locator.registerFactory(() => TopRatedMovieBloc(locator()));
   locator.registerFactory(() => TopRatedTvBloc(locator()));
-  //locator.registerFactory(() => RecommendationMovieBloc(locator()));
-  // locator.registerFactory(() => RecommendationTvBloc(locator()));
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
   locator.registerFactory(

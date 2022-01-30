@@ -131,7 +131,6 @@ class DetailContentTv extends StatelessWidget {
                               child:
                                   BlocBuilder<WatchlistTvBloc, WatchlistState>(
                                 builder: (context, state) {
-                                  print("statenya apa ya : $state");
                                   if (state is WatchlistLoading) {
                                     return const Center(
                                       child: CircularProgressIndicator(),

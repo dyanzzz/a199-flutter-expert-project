@@ -1,18 +1,10 @@
-import 'package:about/about.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/utils/routes.dart';
-import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:popular/popular.dart';
-import 'package:search/search.dart';
-import 'package:top_rated/top_rated.dart';
-import 'package:watchlist/watchlist.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  static const ROUTE_NAME = '/home-movie';
-
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -51,7 +43,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               title: const Text('Tv Show'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, TvHomePage.ROUTE_NAME);
+                Navigator.pushNamed(context, TV_HOME_ROUTE);
               },
             ),
             ListTile(
@@ -78,7 +70,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SEARCH_ROUTE);
             },
             icon: const Icon(Icons.search),
           )
@@ -120,8 +112,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, MOVIE_POPULAR_ROUTE),
               ),
               BlocBuilder<CoreMovieBloc, CoreState>(
                 builder: (context, state) {

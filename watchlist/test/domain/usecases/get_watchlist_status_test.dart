@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:watchlist/watchlist.dart';

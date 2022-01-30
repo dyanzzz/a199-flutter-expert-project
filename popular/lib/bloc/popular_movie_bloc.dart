@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popular/popular.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'popular_event.dart';
 part 'popular_state.dart';

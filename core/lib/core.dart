@@ -48,9 +48,6 @@ export 'package:core/domain/usecases/get_tv_on_the_air.dart';
 export 'package:core/presentation/pages/home_movie_page.dart';
 export 'package:core/presentation/pages/tv_home_page.dart';
 
-export 'package:core/presentation/provider/movie_list_notifier.dart';
-export 'package:core/presentation/provider/tv_list_notifier.dart';
-
 export 'package:core/presentation/widgets/movie_card_list.dart';
 export 'package:core/presentation/widgets/tv_card_list.dart';
 
