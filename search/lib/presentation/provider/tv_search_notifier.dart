@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+/* import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:search/search.dart';
 
@@ -35,3 +35,4 @@ class TvSearchNotifier extends ChangeNotifier {
     );
   }
 }
+ */

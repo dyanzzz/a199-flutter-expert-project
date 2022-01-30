@@ -31,11 +31,11 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => MovieSearchNotifier(
       searchMovies: locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
@@ -69,11 +69,11 @@ void init() {
       removeTvWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
+  /* locator.registerFactory(
     () => TvSearchNotifier(
       searchTv: locator(),
     ),
-  );
+  ); */
   /* locator.registerFactory(
     () => TvPopularNotifier(
       locator(),

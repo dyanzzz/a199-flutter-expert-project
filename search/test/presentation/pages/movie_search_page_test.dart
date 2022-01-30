@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 
 import 'movie_search_page_test.mocks.dart';
 
-@GenerateMocks([MovieSearchNotifier])
+@GenerateMocks([SearchBloc])
 void main() {
-  late MockMovieSearchNotifier mockMovieSearchNotifier;
+  late MockSearchBloc mockSearchBloc;
 
   setUp(() {
-    mockMovieSearchNotifier = MockMovieSearchNotifier();
+    mockSearchBloc = MockSearchBloc();
   });
 
   /// Will return the [child] widget centered inside a `MaterialApp` and a
   /// `Scaffold`.
   Widget _createApp(Widget child) {
-    return ChangeNotifierProvider<MovieSearchNotifier>.value(
-      value: mockMovieSearchNotifier,
+    return BlocProvider<SearchBloc>.value(
+      value: mockSearchBloc,
       child: MaterialApp(
         home: Scaffold(
           body: child,
@@ -31,7 +31,7 @@ void main() {
       (WidgetTester tester) async {
     final textBoxFinder = find.byType(TextField);
 
-    await tester.pumpWidget(_createApp(TextField()));
+    await tester.pumpWidget(_createApp(const TextField()));
 
     expect(textBoxFinder, findsOneWidget);
   });
