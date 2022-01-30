@@ -1,4 +1,4 @@
-part of 'recommendation_movie_bloc.dart';
+/* part of 'recommendation_movie_bloc.dart';
 
 abstract class RecommendationState extends Equatable {
   const RecommendationState();
@@ -37,3 +37,4 @@ class RecommendationTvHasData extends RecommendationState {
   @override
   List<Object> get props => [result];
 }
+ */

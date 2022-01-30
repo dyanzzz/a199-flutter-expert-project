@@ -1,4 +1,4 @@
-part of 'recommendation_movie_bloc.dart';
+/* part of 'recommendation_movie_bloc.dart';
 
 abstract class RecommendationEvent extends Equatable {
   const RecommendationEvent();
@@ -15,3 +15,4 @@ class OnQueryChanged extends RecommendationEvent {
   @override
   List<Object> get props => [id];
 }
+ */

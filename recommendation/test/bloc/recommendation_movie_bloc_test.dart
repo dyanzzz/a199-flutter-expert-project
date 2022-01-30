@@ -1,60 +1,62 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:detail/detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:recommendation/recommendation.dart';
+import 'package:watchlist/watchlist.dart';
 
+import '../../../core/test/dummy_data/dummy_objects.dart';
 import 'recommendation_movie_bloc_test.mocks.dart';
 
-@GenerateMocks([GetMovieRecommendations])
+@GenerateMocks([
+  GetMovieDetail,
+  GetWatchListStatus,
+  GetMovieRecommendations,
+])
 void main() {
-  late RecommendationMovieBloc recommendationMovieBloc;
-  late MockGetMovieRecommendations mockGetMovieRecommendation;
+  late DetailMovieBloc movieBloc;
+  late MockGetMovieDetail mockGetMovieDetail;
+  late MockGetWatchListStatus mockGetWatchListStatus;
+  late MockGetMovieRecommendations mockGetMovieRecommendations;
 
   setUp(() {
-    mockGetMovieRecommendation = MockGetMovieRecommendations();
-    recommendationMovieBloc =
-        RecommendationMovieBloc(mockGetMovieRecommendation);
+    mockGetMovieDetail = MockGetMovieDetail();
+    mockGetWatchListStatus = MockGetWatchListStatus();
+    mockGetMovieRecommendations = MockGetMovieRecommendations();
+    movieBloc = DetailMovieBloc(
+      mockGetMovieDetail,
+      mockGetWatchListStatus,
+      mockGetMovieRecommendations,
+    );
   });
 
   const tId = 1;
   final tMovies = <Movie>[];
+  const tMoviesIsWatchlist = true;
 
   test('initial state should be empty', () {
-    expect(recommendationMovieBloc.state, RecommendationEmpty());
+    expect(movieBloc.state, DetailEmpty());
   });
 
-  blocTest<RecommendationMovieBloc, RecommendationState>(
+  blocTest<DetailMovieBloc, DetailState>(
     'should emits [Loading, HasData] when data is gotten successfully.',
     build: () {
-      when(mockGetMovieRecommendation.execute(tId))
+      when(mockGetMovieDetail.execute(tId))
+          .thenAnswer((_) async => Right(testMovieDetail));
+      when(mockGetWatchListStatus.execute(tId))
+          .thenAnswer((_) async => tMoviesIsWatchlist);
+      when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tMovies));
-      return recommendationMovieBloc;
+      return movieBloc;
     },
-    act: (bloc) => bloc.add(const OnQueryChanged(tId)),
-    wait: const Duration(milliseconds: 500),
+    act: (bloc) => bloc.add(const OnQueryChangedDetail(tId)),
     expect: () => [
-      RecommendationLoading(),
-      RecommendationMovieHasData(tMovies),
+      DetailLoading(),
+      DetailMovieHasData(testMovieDetail, tMoviesIsWatchlist, tMovies),
     ],
-    verify: (bloc) => verify(mockGetMovieRecommendation.execute(tId)),
-  );
-
-  blocTest<RecommendationMovieBloc, RecommendationState>(
-    'should emits [Loading, Error] when data is gotten unsuccessfully.',
-    build: () {
-      when(mockGetMovieRecommendation.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return recommendationMovieBloc;
-    },
-    act: (bloc) => bloc.add(const OnQueryChanged(tId)),
-    wait: const Duration(milliseconds: 500),
-    expect: () => [
-      RecommendationLoading(),
-      const RecommendationError('Server Failure'),
-    ],
-    verify: (bloc) => verify(mockGetMovieRecommendation.execute(tId)),
+    verify: (bloc) => verify(mockGetMovieRecommendations.execute(tId)),
   );
 }

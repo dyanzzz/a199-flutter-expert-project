@@ -249,7 +249,7 @@ packages:
     source: git
     version: "0.3.4"
   detail:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../detail"
       relative: true
@@ -473,6 +473,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:
@@ -878,7 +885,7 @@ packages:
     source: hosted
     version: "1.0.1"
   watchlist:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../watchlist"
       relative: true

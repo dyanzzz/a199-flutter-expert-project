@@ -94,8 +94,8 @@ void init() {
   locator.registerFactory(() => SearchTvBloc(locator()));
   locator.registerFactory(() => TopRatedMovieBloc(locator()));
   locator.registerFactory(() => TopRatedTvBloc(locator()));
-  locator.registerFactory(() => RecommendationMovieBloc(locator()));
-  locator.registerFactory(() => RecommendationTvBloc(locator()));
+  //locator.registerFactory(() => RecommendationMovieBloc(locator()));
+  // locator.registerFactory(() => RecommendationTvBloc(locator()));
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
   locator.registerFactory(
