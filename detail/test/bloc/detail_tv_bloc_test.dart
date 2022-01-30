@@ -9,7 +9,7 @@ import 'package:recommendation/recommendation.dart';
 import 'package:watchlist/watchlist.dart';
 
 import '../../../core/test/dummy_data/dummy_object_tv.dart';
-import '../presentation/provider/tv_detail_notifier_test.mocks.dart';
+import 'detail_tv_bloc_test.mocks.dart';
 
 @GenerateMocks([
   GetTvDetail,
