@@ -18,11 +18,6 @@ class WatchlistMovieBloc extends Bloc<WatchlistEvent, WatchlistState> {
   late bool _watchlistStatus;
   bool get watchlistStatus => _watchlistStatus;
 
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-  static const actionAdd = 'add';
-  static const actionRemove = 'remove';
-
   WatchlistMovieBloc(this._watchlistMovies, this._getWatchListStatus,
       this._saveWatchlist, this._removeWatchlist)
       : super(WatchlistEmpty()) {

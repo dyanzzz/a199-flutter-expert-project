@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
@@ -56,7 +55,7 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
                   width: 80,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),

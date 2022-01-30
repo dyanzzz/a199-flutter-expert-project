@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/utils/routes.dart';
 import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,37 +27,61 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DetailMovieBloc, DetailState>(
-        builder: (context, state) {
-          if (state is DetailLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is DetailMovieHasData) {
-            final result = state.result;
-            final movieRecommendations = state.getMovieRecommendations;
-            final isWatchlist = state.getWatchListStatus;
-
-            return SafeArea(
-              child: DetailContent(
-                result,
-                movieRecommendations,
-                isWatchlist,
-              ),
-            );
-          } else if (state is DetailError) {
-            return SafeArea(
-              child: Center(
-                child: Text(state.message),
+    return BlocListener<WatchlistMovieBloc, WatchlistState>(
+      listenWhen: (context, state) => state is AddWatchlistData,
+      listener: (context, message) {
+        if (message is AddWatchlistData) {
+          if (message.message == watchlistAddSuccessMessage ||
+              message.message == watchlistRemoveSuccessMessage) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(message.message),
               ),
             );
           } else {
-            return const Center(
-              child: Text("Not Found"),
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(message.message),
+                );
+              },
             );
           }
-        },
+        }
+      },
+      child: Scaffold(
+        body: BlocBuilder<DetailMovieBloc, DetailState>(
+          builder: (context, state) {
+            if (state is DetailLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is DetailMovieHasData) {
+              final result = state.result;
+              final movieRecommendations = state.getMovieRecommendations;
+              final isWatchlist = state.getWatchListStatus;
+
+              return SafeArea(
+                child: DetailContent(
+                  result,
+                  movieRecommendations,
+                  isWatchlist,
+                ),
+              );
+            } else if (state is DetailError) {
+              return SafeArea(
+                child: Center(
+                  child: Text(state.message),
+                ),
+              );
+            } else {
+              return const Center(
+                child: Text("Not Found"),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -120,13 +143,12 @@ class DetailContent extends StatelessWidget {
                                 if (!context
                                     .read<WatchlistMovieBloc>()
                                     .watchlistStatus) {
-                                  context.read<WatchlistMovieBloc>().add(
-                                      AddMovieWatchlist(
-                                          movie, WatchlistMovieBloc.actionAdd));
+                                  context
+                                      .read<WatchlistMovieBloc>()
+                                      .add(AddMovieWatchlist(movie, actionAdd));
                                 } else {
                                   context.read<WatchlistMovieBloc>().add(
-                                      AddMovieWatchlist(movie,
-                                          WatchlistMovieBloc.actionRemove));
+                                      AddMovieWatchlist(movie, actionRemove));
                                 }
                               },
                               child: BlocBuilder<WatchlistMovieBloc,
@@ -139,35 +161,10 @@ class DetailContent extends StatelessWidget {
                                   } else if (state is AddWatchlistData) {
                                     final message = state.message;
 
-                                    /* if (message ==
-                                            MovieDetailNotifier
-                                                .watchlistAddSuccessMessage ||
-                                        message ==
-                                            MovieDetailNotifier
-                                                .watchlistRemoveSuccessMessage) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(message),
-                                        ),
-                                      );
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            content: Text(message),
-                                          );
-                                        },
-                                      );
-                                    } */
-
                                     return Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        message ==
-                                                WatchlistMovieBloc
-                                                    .watchlistAddSuccessMessage
+                                        message == watchlistAddSuccessMessage
                                             ? const Icon(Icons.check)
                                             : const Icon(Icons.add),
                                         const Text('Watchlist'),
@@ -228,7 +225,7 @@ class DetailContent extends StatelessWidget {
                               child: ClipRRect(
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                      '$BASE_IMAGE_URL${movie.backdropPath}',
+                                      '$baseImageUrl${movie.backdropPath}',
                                   //width: 150,
                                   placeholder: (context, url) => const Center(
                                     child: CircularProgressIndicator(),

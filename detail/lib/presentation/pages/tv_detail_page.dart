@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/utils/routes.dart';
+import 'package:core/core.dart';
 import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,37 +27,61 @@ class _TvDetailPageState extends State<TvDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DetailTvBloc, DetailState>(
-        builder: (context, state) {
-          if (state is DetailLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is DetailTvHasData) {
-            final result = state.result;
-            final movieRecommendations = state.getTvRecommendations;
-            final isWatchlist = state.getWatchListStatus;
-
-            return SafeArea(
-              child: DetailContentTv(
-                result,
-                movieRecommendations,
-                isWatchlist,
-              ),
-            );
-          } else if (state is DetailError) {
-            return SafeArea(
-              child: Center(
-                child: Text(state.message),
+    return BlocListener<WatchlistTvBloc, WatchlistState>(
+      listenWhen: (context, state) => state is AddWatchlistData,
+      listener: (context, message) {
+        if (message is AddWatchlistData) {
+          if (message.message == watchlistAddSuccessMessage ||
+              message.message == watchlistRemoveSuccessMessage) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(message.message),
               ),
             );
           } else {
-            return const Center(
-              child: Text("Not Found"),
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(message.message),
+                );
+              },
             );
           }
-        },
+        }
+      },
+      child: Scaffold(
+        body: BlocBuilder<DetailTvBloc, DetailState>(
+          builder: (context, state) {
+            if (state is DetailLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is DetailTvHasData) {
+              final result = state.result;
+              final movieRecommendations = state.getTvRecommendations;
+              final isWatchlist = state.getWatchListStatus;
+
+              return SafeArea(
+                child: DetailContentTv(
+                  result,
+                  movieRecommendations,
+                  isWatchlist,
+                ),
+              );
+            } else if (state is DetailError) {
+              return SafeArea(
+                child: Center(
+                  child: Text(state.message),
+                ),
+              );
+            } else {
+              return const Center(
+                child: Text("Not Found"),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -119,13 +143,13 @@ class DetailContentTv extends StatelessWidget {
                                 if (!context
                                     .read<WatchlistTvBloc>()
                                     .watchlistStatus) {
-                                  context.read<WatchlistTvBloc>().add(
-                                      AddTvWatchlist(
-                                          tv, WatchlistTvBloc.actionAdd));
+                                  context
+                                      .read<WatchlistTvBloc>()
+                                      .add(AddTvWatchlist(tv, actionAdd));
                                 } else {
-                                  context.read<WatchlistTvBloc>().add(
-                                      AddTvWatchlist(
-                                          tv, WatchlistTvBloc.actionRemove));
+                                  context
+                                      .read<WatchlistTvBloc>()
+                                      .add(AddTvWatchlist(tv, actionRemove));
                                 }
                               },
                               child:
@@ -138,35 +162,10 @@ class DetailContentTv extends StatelessWidget {
                                   } else if (state is AddWatchlistData) {
                                     final message = state.message;
 
-                                    /* if (message ==
-                                            MovieDetailNotifier
-                                                .watchlistAddSuccessMessage ||
-                                        message ==
-                                            MovieDetailNotifier
-                                                .watchlistRemoveSuccessMessage) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(message),
-                                        ),
-                                      );
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            content: Text(message),
-                                          );
-                                        },
-                                      );
-                                    } */
-
                                     return Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        message ==
-                                                WatchlistTvBloc
-                                                    .watchlistAddSuccessMessage
+                                        message == watchlistAddSuccessMessage
                                             ? const Icon(Icons.check)
                                             : const Icon(Icons.add),
                                         const Text('Watchlist'),
@@ -227,7 +226,7 @@ class DetailContentTv extends StatelessWidget {
                               margin: const EdgeInsets.all(16),
                               child: ClipRRect(
                                 child: CachedNetworkImage(
-                                  imageUrl: '$BASE_IMAGE_URL${tv.backdropPath}',
+                                  imageUrl: '$baseImageUrl${tv.backdropPath}',
                                   //width: 150,
                                   placeholder: (context, url) => const Center(
                                     child: CircularProgressIndicator(),

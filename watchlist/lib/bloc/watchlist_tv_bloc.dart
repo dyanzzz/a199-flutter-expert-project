@@ -14,11 +14,6 @@ class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
   late bool _watchlistStatus;
   bool get watchlistStatus => _watchlistStatus;
 
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-  static const actionAdd = 'add';
-  static const actionRemove = 'remove';
-
   WatchlistTvBloc(
     this._watchlistTv,
     this._getTvWatchListStatus,
