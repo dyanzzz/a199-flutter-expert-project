@@ -75,4 +75,26 @@ void main() {
     ],
     verify: (bloc) => verify(mockGetMovieDetail.execute(tId)),
   );
+
+  blocTest<DetailMovieBloc, DetailState>(
+    'Should emit [Loading, Error] when data is gotten failed',
+    build: () {
+      when(mockGetMovieDetail.execute(tId))
+          .thenAnswer((_) async => Left(ServerFailure('')));
+      when(mockGetWatchListStatus.execute(tId))
+          .thenAnswer((_) async => tMoviesIsWatchlist);
+      when(mockGetMovieRecommendations.execute(tId))
+          .thenAnswer((_) async => Left(ServerFailure('')));
+
+      return detailMovieBloc;
+    },
+    act: (bloc) => bloc.add(const OnQueryChangedDetail(tId)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError(''),
+    ],
+    verify: (bloc) {
+      verify(mockGetMovieDetail.execute(tId));
+    },
+  );
 }

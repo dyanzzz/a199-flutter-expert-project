@@ -22,32 +22,25 @@ class DetailTvBloc extends Bloc<DetailEvent, DetailState> {
         final resultStatusWatchlist = await _getTvWatchListStatus.execute(id);
         final resultRecommendationsTv = await _getTvRecommendation.execute(id);
 
-        late TvDetail dataDetail;
-        late List<Tv> recommendationTv;
-
         result.fold(
           (failure) {
             emit(DetailError(failure.message));
           },
           (data) {
-            dataDetail = data;
+            resultRecommendationsTv.fold(
+              (failure) {
+                emit(DetailError(failure.message));
+              },
+              (recommendation) {
+                emit(DetailTvHasData(
+                  data,
+                  resultStatusWatchlist,
+                  recommendation,
+                ));
+              },
+            );
           },
         );
-
-        resultRecommendationsTv.fold(
-          (failure) {
-            emit(DetailError(failure.message));
-          },
-          (recommendation) {
-            recommendationTv = recommendation;
-          },
-        );
-
-        emit(DetailTvHasData(
-          dataDetail,
-          resultStatusWatchlist,
-          recommendationTv,
-        ));
       },
     );
   }

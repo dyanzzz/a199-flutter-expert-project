@@ -83,4 +83,26 @@ void main() {
     ],
     verify: (bloc) => verify(mockGetTvDetail.execute(tId)),
   );
+
+  blocTest<DetailTvBloc, DetailState>(
+    'Should emit [Loading, Error] when data is gotten failed',
+    build: () {
+      when(mockGetTvDetail.execute(tId))
+          .thenAnswer((_) async => Left(ServerFailure('')));
+      when(mockGetTvWatchListStatus.execute(tId))
+          .thenAnswer((_) async => tMoviesIsWatchlist);
+      when(mockGetTvRecommendation.execute(tId))
+          .thenAnswer((_) async => Left(ServerFailure('')));
+
+      return detailTvBloc;
+    },
+    act: (bloc) => bloc.add(const OnQueryChangedDetail(tId)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError(''),
+    ],
+    verify: (bloc) {
+      verify(mockGetTvDetail.execute(tId));
+    },
+  );
 }

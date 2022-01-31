@@ -29,33 +29,26 @@ class DetailMovieBloc extends Bloc<DetailEvent, DetailState> {
         final resultRecommendationsMovies =
             await _recommendationsMovies.execute(id);
 
-        late MovieDetail dataDetail;
-        late List<Movie> recommendationMovies;
-
         result.fold(
           (failure) {
             emit(DetailError(failure.message));
           },
           (data) {
-            dataDetail = data;
+            resultRecommendationsMovies.fold(
+              (failure) {
+                emit(DetailError(failure.message));
+              },
+              (recommendation) {
+                emit(
+                  DetailMovieHasData(
+                    data,
+                    resultStatusWatchlist,
+                    recommendation,
+                  ),
+                );
+              },
+            );
           },
-        );
-
-        resultRecommendationsMovies.fold(
-          (failure) {
-            emit(DetailError(failure.message));
-          },
-          (recommendation) {
-            recommendationMovies = recommendation;
-          },
-        );
-
-        emit(
-          DetailMovieHasData(
-            dataDetail,
-            resultStatusWatchlist,
-            recommendationMovies,
-          ),
         );
       },
     );
