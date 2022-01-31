@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:watchlist/watchlist.dart';
 
 import 'watchlist_tv_bloc_test.mocks.dart';
+import '../../../core/test/dummy_data/dummy_object_tv.dart';
 
 @GenerateMocks([
   GetTvWatchlist,
@@ -86,4 +87,49 @@ void main() {
     ],
     verify: (bloc) => verify(mockGetTvWatchlist.execute()),
   );
+
+  group('Watchlist status', () {
+    blocTest<WatchlistTvBloc, WatchlistState>(
+      'should get the watchlist status',
+      build: () {
+        when(mockGetWatchlistStatus.execute(tTv.id))
+            .thenAnswer((_) async => true);
+        return watchlistTvBloc;
+      },
+      act: (bloc) => bloc.add(GetWatchlistStatus(tTv.id)),
+      expect: () => [const GetWatchlistStatusData(true)],
+    );
+  });
+
+  group('Save Watchlist', () {
+    blocTest<WatchlistTvBloc, WatchlistState>(
+      'should execute save watchlist when function is called',
+      build: () {
+        when(mockSaveWatchlist.execute(testTvDetail))
+            .thenAnswer((_) async => const Right('Added to Watchlist'));
+        when(mockGetWatchlistStatus.execute(testTvDetail.id))
+            .thenAnswer((_) async => true);
+
+        return watchlistTvBloc;
+      },
+      act: (bloc) => bloc.add(AddTvWatchlist(testTvDetail, 'add')),
+      verify: (bloc) => mockSaveWatchlist.execute(testTvDetail),
+    );
+  });
+
+  group('Remove Watchlist', () {
+    blocTest<WatchlistTvBloc, WatchlistState>(
+      'should execute remove watchlist when function called',
+      build: () {
+        when(mockRemoveWatchlist.execute(testTvDetail))
+            .thenAnswer((_) async => const Right('Removed from Watchlist'));
+        when(mockGetWatchlistStatus.execute(testTvDetail.id))
+            .thenAnswer((_) async => false);
+
+        return watchlistTvBloc;
+      },
+      act: (bloc) => bloc.add(AddTvWatchlist(testTvDetail, 'remove')),
+      verify: (bloc) => verify(mockRemoveWatchlist.execute(testTvDetail)),
+    );
+  });
 }

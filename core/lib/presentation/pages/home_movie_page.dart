@@ -99,6 +99,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );
@@ -126,6 +127,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );
@@ -155,6 +157,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );

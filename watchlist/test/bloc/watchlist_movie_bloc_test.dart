@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:watchlist/watchlist.dart';
 
 import 'watchlist_movie_bloc_test.mocks.dart';
+import '../../../core/test/dummy_data/dummy_objects.dart';
 
 @GenerateMocks([
   GetWatchlistMovies,
@@ -85,4 +86,49 @@ void main() {
     ],
     verify: (bloc) => verify(mockGetWatchlistMovies.execute()),
   );
+
+  group('Watchlist status', () {
+    blocTest<WatchlistMovieBloc, WatchlistState>(
+      'should get the watchlist status',
+      build: () {
+        when(mockGetWatchlistStatus.execute(tMovie.id))
+            .thenAnswer((_) async => true);
+        return watchlistMovieBloc;
+      },
+      act: (bloc) => bloc.add(GetWatchlistStatus(tMovie.id)),
+      expect: () => [const GetWatchlistStatusData(true)],
+    );
+  });
+
+  group('Save Watchlist', () {
+    blocTest<WatchlistMovieBloc, WatchlistState>(
+      'should execute save watchlist when function is called',
+      build: () {
+        when(mockSaveWatchlist.execute(testMovieDetail))
+            .thenAnswer((_) async => const Right('Added to Watchlist'));
+        when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+            .thenAnswer((_) async => true);
+
+        return watchlistMovieBloc;
+      },
+      act: (bloc) => bloc.add(AddMovieWatchlist(testMovieDetail, 'add')),
+      verify: (bloc) => mockSaveWatchlist.execute(testMovieDetail),
+    );
+  });
+
+  group('Remove Watchlist', () {
+    blocTest<WatchlistMovieBloc, WatchlistState>(
+      'should execute remove watchlist when function called',
+      build: () {
+        when(mockRemoveWatchlist.execute(testMovieDetail))
+            .thenAnswer((_) async => const Right('Removed from Watchlist'));
+        when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+            .thenAnswer((_) async => false);
+
+        return watchlistMovieBloc;
+      },
+      act: (bloc) => bloc.add(AddMovieWatchlist(testMovieDetail, 'remove')),
+      verify: (bloc) => verify(mockRemoveWatchlist.execute(testMovieDetail)),
+    );
+  });
 }

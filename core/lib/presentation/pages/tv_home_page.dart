@@ -99,6 +99,7 @@ class _TvHomePageState extends State<TvHomePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );
@@ -126,6 +127,7 @@ class _TvHomePageState extends State<TvHomePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );
@@ -153,6 +155,7 @@ class _TvHomePageState extends State<TvHomePage> {
                   } else if (state is CoreError) {
                     return SafeArea(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );
