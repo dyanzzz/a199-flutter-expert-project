@@ -18,9 +18,12 @@ class WatchlistMovieBloc extends Bloc<WatchlistEvent, WatchlistState> {
   late bool _watchlistStatus;
   bool get watchlistStatus => _watchlistStatus;
 
-  WatchlistMovieBloc(this._watchlistMovies, this._getWatchListStatus,
-      this._saveWatchlist, this._removeWatchlist)
-      : super(WatchlistEmpty()) {
+  WatchlistMovieBloc(
+    this._watchlistMovies,
+    this._getWatchListStatus,
+    this._saveWatchlist,
+    this._removeWatchlist,
+  ) : super(WatchlistEmpty()) {
     on<OnQueryChangedWatchlistMovie>(
       (event, emit) async {
         emit(WatchlistLoading());

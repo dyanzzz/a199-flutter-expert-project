@@ -20,7 +20,7 @@ class WatchlistTvBloc extends Bloc<WatchlistEvent, WatchlistState> {
     this._saveTvWatchlist,
     this._removeTvWatchlist,
   ) : super(WatchlistEmpty()) {
-    on<OnQueryChangedWatchlistMovie>(
+    on<OnQueryChangedWatchlistTv>(
       (event, emit) async {
         emit(WatchlistLoading());
 

@@ -14,8 +14,8 @@ class OnQueryChangedWatchlistMovie extends WatchlistEvent {
   List<Object> get props => [];
 }
 
-class OnQueryChangedDetailTv extends WatchlistEvent {
-  const OnQueryChangedDetailTv();
+class OnQueryChangedWatchlistTv extends WatchlistEvent {
+  const OnQueryChangedWatchlistTv();
 
   @override
   List<Object> get props => [];

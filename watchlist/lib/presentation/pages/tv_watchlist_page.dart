@@ -13,7 +13,9 @@ class _TvWatchlistPageState extends State<TvWatchlistPage> with RouteAware {
   void initState() {
     super.initState();
     Future.microtask(
-      () => context.read<WatchlistTvBloc>().add(const OnQueryChangedDetailTv()),
+      () => context
+          .read<WatchlistTvBloc>()
+          .add(const OnQueryChangedWatchlistTv()),
     );
   }
 
@@ -25,7 +27,7 @@ class _TvWatchlistPageState extends State<TvWatchlistPage> with RouteAware {
 
   @override
   void didPopNext() {
-    context.read<WatchlistTvBloc>().add(const OnQueryChangedDetailTv());
+    context.read<WatchlistTvBloc>().add(const OnQueryChangedWatchlistTv());
   }
 
   @override
